@@ -21,12 +21,6 @@ public class BaseController : MonoBehaviour
             case State.Moving:
                 OnMoving();
                 break;
-            case State.Attack:
-                OnAttack();
-                break;
-            case State.Dodge:
-                OnDodge();
-                break;
             case State.Die:
                 OnDie();
                 break;
@@ -35,7 +29,5 @@ public class BaseController : MonoBehaviour
 
     protected virtual void OnIdle() { }
     protected virtual void OnMoving() { }
-    protected virtual void OnAttack() { }
-    protected virtual void OnDodge() { }
     protected virtual void OnDie() { }
 }

@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : BaseController
 {
+    public PlayerStat stat;
     public Vector3 moveDir;
     private CharacterController controller;
 
@@ -54,38 +55,6 @@ public class PlayerController : BaseController
             state = State.Idle;
     }
 
-    protected override void OnAttack()
-    {
-        //if (stat.isAttacking || stat.isDodging)
-            return;
-
-        //stat.isAttacking = true;
-
-        Ray mousePos = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(mousePos, out hit, 100f))
-        {
-            Vector3 lookDir = new Vector3(hit.point.x, transform.position.y, hit.point.z) - transform.position;
-            transform.rotation = Quaternion.LookRotation(lookDir);
-        }
-
-        animator.Play(ANIM_ATTACK);
-
-        //칼 콜라이더
-        transform.GetChild(0).GetComponent<Collider>().enabled = true;
-    }
-
-    protected override void OnDodge()
-    {
-       // if (stat.isAttacking || stat.isDodging)
-            return;
-
-        //stat.isDodging = true;
-        //Debug.Log("dodge");
-
-        animator.Play(ANIM_DODGE);
-    }
-
     protected override void OnDie()
     {
 
@@ -100,8 +69,6 @@ public class PlayerController : BaseController
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            state = State.Dodge;
 
         if (Input.GetMouseButton(0))
             state = State.Attack;

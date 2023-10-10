@@ -65,7 +65,7 @@ public class MonsterController : BaseController
         {
             nav.SetDestination(offSet);
             target = null;
-            state = State.Dodge; //복귀
+            //복귀
             return;
         }
 
@@ -86,7 +86,7 @@ public class MonsterController : BaseController
         }
     }
 
-    protected override void OnAttack()
+    private void Attack()
     {
         if (isAttacking)
             return;
@@ -98,12 +98,6 @@ public class MonsterController : BaseController
         animator.CrossFade("Attack", 0.1f);
         //히트 관련
         transform.GetChild(0).GetComponent<Collider>().enabled = true;
-    }
-
-    protected override void OnDodge()
-    {
-        if ((transform.position - offSet).magnitude <= 1f)
-            state = State.Idle;
     }
 
     void MakeStateMoving()

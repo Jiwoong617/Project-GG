@@ -5,25 +5,14 @@ using UnityEngine;
 
 public class Stat : MonoBehaviour
 {
-    [SerializeField]
-    protected int _hp;
-    [SerializeField]
-    protected int _maxHp;
-    [SerializeField]
-    protected int _attack;
-    [SerializeField]
-    protected float _moveSpeed;
+    protected StatInfo stat;
 
-    public int Hp { get { return _hp; } set { _hp = value; } }
-    public int MaxHp { get { return _maxHp; } set { _maxHp = value; } }
-    public int Attack { get { return _attack; } set { _attack = value; } }
-    public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
+    public int Hp { get { return stat._hp; } set { stat._hp = value; } }
+    public int MaxHp { get { return stat._maxHp; } set { stat._maxHp = value; } }
+    public int Attack { get { return stat._attack; } set { stat._attack = value; } }
+    public int Defence { get { return stat._defence; } set { stat._defence = value; } }
+    public float MoveSpeed { get { return stat._moveSpeed; } set { stat._moveSpeed = value; } }
 
-    private void Start()
-    {
-    }
-
-    //normal damage
     public virtual void TakeDamage(Stat attacker)
     {
         int damage = attacker.Attack;
@@ -43,12 +32,13 @@ public class Stat : MonoBehaviour
         //gameObject.SetActive(false);
     }
 
-    protected virtual void SetStat()
+    public void SetStat(int hp, int atk, int dfc, float speed)
     {
-        Hp = 100;
-        MaxHp = 100;
-        Attack = 5;
-        MoveSpeed = 5;
+        Hp = hp;
+        MaxHp = hp;
+        Attack = atk;
+        Defence = dfc;
+        MoveSpeed = speed;
     }
 }
 
