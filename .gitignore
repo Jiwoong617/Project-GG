@@ -73,6 +73,8 @@ crashlytics-build.properties
 
 /[Ff]older/directorytobeignored/
 
+/[Aa]ssets/*.meta
+
 /[Aa]ssets/Editor Default Resources/
 
 /[Aa]ssets/ExternalDependencyManager/
