@@ -16,3 +16,16 @@ public enum SceneList
     AppScene,
     GameScene,
 }
+public enum BodyParts
+{
+    Arm,
+    Leg,
+    Back,
+    Chest,
+    Shoulder,
+}
+public enum Gender
+{
+    Man,
+    Woman,
+}
