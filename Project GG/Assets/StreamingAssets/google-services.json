@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "702248933800",
+    "firebase_url": "https://gymgame-71fc4-default-rtdb.firebaseio.com",
+    "project_id": "gymgame-71fc4",
+    "storage_bucket": "gymgame-71fc4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702248933800:android:98ea2d3dded9359c8d659d",
+        "android_client_info": {
+          "package_name": "com.project.gg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvB1KJU8JVcOXJ5Z0HFdf3an0CLNYAh2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
