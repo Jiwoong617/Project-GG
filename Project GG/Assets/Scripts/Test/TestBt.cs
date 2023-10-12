@@ -46,7 +46,7 @@ public class TestBt : MonoBehaviour
     private void Start()
     {
         reference = FirebaseDatabase.DefaultInstance.RootReference;
-        
+        UserDataConfirm();
     }
     public void UserDataConfirm()
     {
@@ -56,6 +56,6 @@ public class TestBt : MonoBehaviour
         else gender = true;
         HealthUserData newUserData = new HealthUserData(name,gender);
         string json = JsonConvert.SerializeObject(newUserData);
-        reference.Child(newUserData.returnUID()).SetRawJsonValueAsync(json);
+        reference.Child("UserData").Child(newUserData.returnUID()).SetRawJsonValueAsync(json);
     }
 }
