@@ -80,3 +80,7 @@ crashlytics-build.properties
 [Pp]roject GG/[Aa]ssets/Parse/
 
 [Pp]roject GG/[Aa]ssets/Plugins/
+
+[Pp]roject GG/[Ss]treamingAssets/*.meta
+
+[Pp]roject GG/[Aa]ssets/*.meta
