@@ -65,18 +65,18 @@ sysinfo.txt
 crashlytics-build.properties
 
 # Packed Addressables
-/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
 # Temporary auto-generated Android Assets
 [Aa]ssets/[Ss]treamingAssets/aa.meta
 [Aa]ssets/[Ss]treamingAssets/aa/*
 
-[Aa]ssets/Editor Default Resources/
+[Pp]roject GG/[Aa]ssets/Editor Default Resources/
 
-[Aa]ssets/ExternalDependencyManager/
+[Pp]roject GG/[Aa]ssets/ExternalDependencyManager/
 
-[Aa]ssets/Firebase/
+[Pp]roject GG/[Aa]ssets/Firebase/
 
-[Aa]ssets/Parse/
+[Pp]roject GG/[Aa]ssets/Parse/
 
-[Aa]ssets/Plugins/
+[Pp]roject GG/[Aa]ssets/Plugins/
