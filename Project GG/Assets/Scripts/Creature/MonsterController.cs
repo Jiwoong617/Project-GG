@@ -5,45 +5,33 @@ using UnityEngine.AI;
 
 public class MonsterController : BaseController
 {
-    Stat stat;
-    NavMeshAgent nav;
-    Animator animator;
+    public bool isFree = true;
 
-    [SerializeField]
-    protected float maxMoveRange = 20f;
-    [SerializeField]
-    protected float detectRange = 10f;
+    Stat stat = new();
+    Animator animator;
+    [SerializeField] GameObject target;
+
     [SerializeField]
     protected float attackRange = 1f;
 
-    protected Vector3 offSet;
     float distance;
-    bool isAttacking;
 
     private void Start()
     {
-        stat = GetComponent<Stat>();
-        nav = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        offSet = transform.position;
+        //animator = GetComponent<Animator>();
+
     }
 
-    protected override void OnIdle()
+    public void Init(Vector3 pos, StatInfo status)
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
-            return;
+        isFree = false;
+        gameObject.SetActive(true);
+        state = State.Moving;
 
-        distance = (player.transform.position - transform.position).magnitude;
-        if (distance <= detectRange)
-        {
-            target = player;
-            state = State.Moving;
+        stat.SetStat(status);
+        transform.position = pos;
 
-            return;
-        }
-
-        animator.Play("Idle");
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 
     protected override void OnMoving()
@@ -54,59 +42,43 @@ public class MonsterController : BaseController
         {
             if (distance <= attackRange)
             {
-                nav.SetDestination(transform.position);
-                state = State.Attack;
+                Attack();
 
                 return;
             }
         }
 
-        if (maxMoveRange <= (offSet - transform.position).magnitude)
-        {
-            nav.SetDestination(offSet);
-            target = null;
-            //복귀
-            return;
-        }
-
         if (distance < 0.5f)
         {
-            state = State.Idle;
+            return;
         }
         else
         {
-            nav.SetDestination(target.transform.position);
-            nav.speed = stat.MoveSpeed;
-
-            Vector3 dir = target.transform.position - transform.position;
-            dir.y = transform.position.y;
+            Vector3 dir = (target.transform.position - transform.position).normalized;
+            //dir.y = transform.position.y;
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
+            transform.position += dir * Time.deltaTime * stat.MoveSpeed;
 
-            animator.Play("Walk");
+            //animator.Play("Walk");
         }
     }
 
+    protected override void OnDie()
+    {
+        isFree = true;
+        gameObject.SetActive(false);
+    }
+
+    public void DieFunc() => OnDie();
+
     private void Attack()
     {
-        if (isAttacking)
-            return;
-        isAttacking = true;
-
-        Vector3 dir = target.transform.position - transform.position;
-        dir.y = transform.position.y;
-        transform.rotation = Quaternion.LookRotation(dir);
-        animator.CrossFade("Attack", 0.1f);
-        //히트 관련
-        transform.GetChild(0).GetComponent<Collider>().enabled = true;
+    //    Vector3 dir = target.transform.position - transform.position;
+    //    dir.y = transform.position.y;
+    //    transform.rotation = Quaternion.LookRotation(dir);
+    //    animator.CrossFade("Attack", 0.1f);
+    //    //히트 관련
+    //    transform.GetChild(0).GetComponent<Collider>().enabled = true;
     }
 
-    void MakeStateMoving()
-    {
-        isAttacking = false;
-
-        //칼 콜라이더 비활성화
-        transform.GetChild(0).GetComponent<Collider>().enabled = false;
-
-        state = State.Moving;
-    }
 }

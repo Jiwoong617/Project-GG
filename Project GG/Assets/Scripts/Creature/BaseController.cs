@@ -7,11 +7,7 @@ public class BaseController : MonoBehaviour
     [SerializeField]
     protected State state = State.Idle;
 
-    [SerializeField]
-    protected GameObject target;
-
-
-    private void Update()
+    protected void Update()
     {
         switch (state)
         {

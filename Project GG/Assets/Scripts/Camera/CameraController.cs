@@ -1,12 +1,15 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     [SerializeField] Vector3 Offset = new Vector3(0, 9, -6);
     [SerializeField] GameObject player;
+
+    private float bias = 5f;
 
     private void Awake()
     {
@@ -16,7 +19,8 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        transform.position = player.transform.position + Offset;
+        Vector3 targetPos = player.transform.position;
+        transform.position = Vector3.Lerp(transform.position, targetPos + Offset, bias * Time.deltaTime);
     }
 
     private void CamShake()

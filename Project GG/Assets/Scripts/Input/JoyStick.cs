@@ -10,25 +10,23 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
 
     private float rad; //¹ÝÁö¸§
-    private bool istouch;
     private Vector3 movePos;
 
     [SerializeField] private GameObject player;
     [SerializeField] private float speed;
 
+    private PlayerController pc;
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        if(pc == null || player == null)
+        {
+            player = GameObject.FindWithTag("Player");
+            pc = player.GetComponent<PlayerController>();
+        }
         rad = bg_rect.rect.width * 0.5f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (istouch)
-            player.transform.position += movePos;
-    }
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -40,18 +38,18 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
         val = val.normalized;
         float distance = Vector2.Distance(bg_rect.position, stick_rect.position) / rad;
-        movePos = new Vector3(val.x, 0, val.y) * speed * distance * Time.deltaTime;
+        movePos = new Vector3(val.x, 0, val.y);
+        pc.SetDir(movePos);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        istouch = true;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        istouch = false;
         stick_rect.localPosition = Vector3.zero;
         movePos = Vector3.zero;
+        pc.SetDir(movePos);
     }
 }
