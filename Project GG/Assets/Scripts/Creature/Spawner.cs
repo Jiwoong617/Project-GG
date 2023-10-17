@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        player = Global.Player;
 
         for (int i = 0; i < 10; i++)
             Spawn();
@@ -25,6 +25,8 @@ public class Spawner : MonoBehaviour
     {
         Vector3 pos = GetSpawnPos();
         MonsterController mc = GetClone(monster);
+
+        //юс╫ц
         mc.Init(pos, new StatInfo(100, 100, 100, 100, 5));
     }
 

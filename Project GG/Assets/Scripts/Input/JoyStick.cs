@@ -21,7 +21,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     {
         if(pc == null || player == null)
         {
-            player = GameObject.FindWithTag("Player");
+            player = Global.Player;
             pc = player.GetComponent<PlayerController>();
         }
         rad = bg_rect.rect.width * 0.5f;

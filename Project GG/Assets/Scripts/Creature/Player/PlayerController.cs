@@ -17,6 +17,7 @@ public class PlayerController : BaseController
 
     private void Awake()
     {
+        Global.Player = gameObject;
     }
 
     private void Start()

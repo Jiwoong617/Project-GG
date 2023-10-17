@@ -12,11 +12,10 @@ GameObject:
   - component: {fileID: 4585961314082072743}
   - component: {fileID: 8476438135008650588}
   - component: {fileID: 5089135590217382712}
-  - component: {fileID: 8875976902314442443}
   - component: {fileID: 9119669215070870407}
   m_Layer: 0
   m_Name: Monster
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,21 +108,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8875976902314442443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2874272760422204276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9e397525a3af3e48a274bd439de2259, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  moveDir: {x: 0, y: 0, z: 0}
-  animator: {fileID: 0}
 --- !u!114 &9119669215070870407
 MonoBehaviour:
   m_ObjectHideFlags: 0
