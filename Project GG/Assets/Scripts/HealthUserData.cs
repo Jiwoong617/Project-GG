@@ -22,12 +22,12 @@ public class HealthUserData
     public int[] BodyMaxExpArray = new int[5];
     //다시 생각해보니 서버에 올릴 이유가 없을지도?
     //레벨업 같은건 다 클라에서 해서 데이터만 업로드하니까?
-    public HealthUserData(string _name, bool _gender)
+    public HealthUserData(string _name, bool _gender, string _uid)
     {
         Name = _name;
         Gender = _gender;
         //UID는 우선스킵
-        UID = "0";
+        UID = _uid;
     }
     public string returnUID()
     {

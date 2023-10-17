@@ -10,7 +10,7 @@ public class UiButton : MonoBehaviour
 {
     protected Button button;
 
-    protected virtual void buttonFunc()
+    public virtual void buttonFunc()
     {
 
     }
