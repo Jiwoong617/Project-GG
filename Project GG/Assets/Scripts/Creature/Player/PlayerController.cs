@@ -11,9 +11,10 @@ public class PlayerController : BaseController
 
     [SerializeField] private Animator animator;
 
-    const string ANIM_IDLE = "player_idle";
-    const string ANIM_WALKING = "player_walking";
-    const string ANIM_ATTACK = "player_attack";
+    const string ANIM_IDLE = "Idle";
+    const string ANIM_MOVE = "Move";
+    const string ANIM_SPRINT = "Sprint";
+    const string ANIM_ATTACK = "Attack";
 
     private void Awake()
     {
@@ -22,6 +23,8 @@ public class PlayerController : BaseController
 
     private void Start()
     {
+        animator = transform.GetChild(0).GetComponent<Animator>();
+
         //임시
         stat.SetStat(new StatInfo(100, 100, 100, 100, 10));
     }
@@ -35,7 +38,7 @@ public class PlayerController : BaseController
             return;
         }
 
-        //animator.Play(ANIM_IDLE);
+        animator.Play(ANIM_IDLE);
     }
 
     protected override void OnMoving()
@@ -48,7 +51,9 @@ public class PlayerController : BaseController
 
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(moveDir), 20 * Time.deltaTime);
         transform.position += moveDir * Time.deltaTime * stat.MoveSpeed;
-        //animator.Play(ANIM_WALKING);
+
+        if(stat.MoveSpeed > 15) animator.Play(ANIM_SPRINT);
+        else animator.Play(ANIM_MOVE);
     }
 
     protected override void OnDie()

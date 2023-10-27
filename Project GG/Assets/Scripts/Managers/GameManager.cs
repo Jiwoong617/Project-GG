@@ -21,10 +21,10 @@ public class GameManager : MonoBehaviour
         if(instance == null)
             instance = this;
 
-        Init();
+        GameStart();
     }
 
-    private void Init()
+    private void GameStart()
     {
         // 실행 순서
         //나중에 find with tags로 찾는 것들 다 global로 참조하게 바꿀거임
@@ -39,4 +39,10 @@ public class GameManager : MonoBehaviour
         // 스포너 생성
         // UI 생성
     }
+
+    public void GameOver()
+    {
+
+    }
+
 }
