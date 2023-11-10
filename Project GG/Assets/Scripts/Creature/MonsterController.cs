@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,11 +16,12 @@ public class MonsterController : BaseController
     protected float attackRange = 1f;
 
     float distance;
+    Vector3 originVect;
 
     private void Start()
     {
         //animator = GetComponent<Animator>();
-
+        originVect = transform.position;
     }
 
     public void Init(Vector3 pos, StatInfo status)
@@ -81,4 +83,17 @@ public class MonsterController : BaseController
     //    transform.GetChild(0).GetComponent<Collider>().enabled = true;
     }
 
+    public override void OnAttacked(Stat s)
+    {
+        stat.TakeDamage(s);
+        if (stat.Hp <= 0)
+            state = State.Die;
+    }
+
+    IEnumerator MoveMotion()
+    {
+        transform.DOPunchScale(Vector3.one, 2f, 2).OnComplete(() => transform.position = originVect);
+        yield return new WaitForSeconds(2f);
+    }
 }
+    

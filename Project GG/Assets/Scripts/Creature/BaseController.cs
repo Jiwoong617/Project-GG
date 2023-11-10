@@ -26,4 +26,6 @@ public class BaseController : MonoBehaviour
     protected virtual void OnIdle() { }
     protected virtual void OnMoving() { }
     protected virtual void OnDie() { }
+
+    public virtual void OnAttacked(Stat s) { }
 }

@@ -10,11 +10,14 @@ public class PlayerController : BaseController
     public Vector3 moveDir;
 
     [SerializeField] private Animator animator;
+    [SerializeField] private AnimationClip AttackClip;
 
     const string ANIM_IDLE = "Idle";
     const string ANIM_MOVE = "Move";
     const string ANIM_SPRINT = "Sprint";
     const string ANIM_ATTACK = "Attack";
+    const string ANIM_DEATH = "Death";
+
 
     private void Awake()
     {
@@ -23,7 +26,7 @@ public class PlayerController : BaseController
 
     private void Start()
     {
-        animator = transform.GetChild(0).GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         //임시
         stat.SetStat(new StatInfo(100, 100, 100, 100, 10));
@@ -62,4 +65,40 @@ public class PlayerController : BaseController
     }
 
     public void SetDir(Vector3 dir) => moveDir = dir;
+
+
+    public void Attack()
+    {
+        Collider[] col = Physics.OverlapBox(transform.position + transform.forward*2 + Vector3.up, new Vector3(1, 0.5f, 1), transform.rotation, 1<< LayerMask.NameToLayer("Monster"));
+        //if (col.Length > 0) Debug.Log(col.Length);
+        Debug.Log("attack");
+        foreach(Collider c in col)
+        {
+            c.GetComponent<BaseController>().OnAttacked(stat);
+        }
+    }
+    //IEnumerator AttackLoop()
+    //{
+    //    yield return new WaitForSeconds(AttackClip.length/2);
+
+    //    while(state != State.Die)
+    //    {
+    //        Collider[] col = Physics.OverlapBox(transform.position + transform.forward*2 + Vector3.up, new Vector3(1, 0.5f, 1), transform.rotation, 1<< LayerMask.NameToLayer("Monster"));
+    //        //if (col.Length > 0) Debug.Log(col.Length);
+    //        Debug.Log("attack");
+    //        foreach(Collider c in col)
+    //        {
+    //            c.GetComponent<BaseController>().OnAttacked(stat);
+    //        }
+
+    //        yield return new WaitForSeconds(AttackClip.length);
+    //    }
+    //}
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.matrix = transform.localToWorldMatrix;
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawCube(new Vector3(0, 1, 2), new Vector3(1, 0.5f, 1)*2);
+    //}
 }
