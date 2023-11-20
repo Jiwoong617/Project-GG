@@ -6,25 +6,27 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    private List<MonsterController> pool = new();
+    public Coroutine spawnCo;
 
     [SerializeField] GameObject monster;
+    [SerializeField] EnemyList enemyList;
     [SerializeField] float distance = 20f;
 
+    private List<MonsterController> pool = new();
     private GameObject player;
 
     private void Start()
     {
         player = Global.Player;
-
-        for (int i = 0; i < 10; i++)
-            Spawn();
+        Global.Spawner = this;
+        spawnCo = StartCoroutine(SpawnMobs());
     }
 
     public void Spawn()
     {
         Vector3 pos = GetSpawnPos();
         MonsterController mc = GetClone(monster);
+        Instantiate(enemyList.EnemyPref[Random.Range(0, enemyList.EnemyPref.Count)], mc.transform);
 
         //юс╫ц
         mc.Init(pos, new StatInfo(100, 100, 100, 100, 5));
@@ -56,5 +58,14 @@ public class Spawner : MonoBehaviour
             0, playerPos.z + (Random.Range(0, 2) == 0 ? -z : z));
 
         return pos;
+    }
+
+    IEnumerator SpawnMobs()
+    {
+        while (player.GetComponent<PlayerController>().isAlive)
+        {
+            Spawn();
+            yield return new WaitForSeconds(3);
+        }
     }
 }

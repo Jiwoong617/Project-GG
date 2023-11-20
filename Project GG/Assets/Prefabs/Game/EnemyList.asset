@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57101b96b55d47345b66d2ce55b627c9, type: 3}
+  m_Name: EnemyList
+  m_EditorClassIdentifier: 
+  EnemyPref:
+  - {fileID: 5073589500609218522, guid: 4cdd0f536b998c141987f5362d20d263, type: 3}
+  - {fileID: 2081209941963662239, guid: 475c2b2992311884da42708c21b4e989, type: 3}
+  - {fileID: 7116164977511586910, guid: 54447e78ac5be41428f9078cf6910bf7, type: 3}
+  - {fileID: 6666603328627169091, guid: 0329acc1efc28324e94f5bd5a062069e, type: 3}
+  - {fileID: 1397227135969740047, guid: 7f8fe02ce2c90a447861132975571507, type: 3}
+  - {fileID: 5189002227044462176, guid: be681692a047cee4baa286092a6f04e6, type: 3}
+  - {fileID: 4335471984611049496, guid: e4f3387dd249a6f42b208bdf329867b1, type: 3}
+  - {fileID: 8780654592860833253, guid: cd5c0226d9d4b554885c988834915042, type: 3}
+  - {fileID: 3385439625878996250, guid: 80568ac56eee4324c9e6b89e04fdcb80, type: 3}
+  - {fileID: 2229596374276676037, guid: 5ebdbc030ec57844d95ccb60b8223fd7, type: 3}
+  - {fileID: 2629127272418962556, guid: 8dc465f46b6c8b242be3b0a23bd18bf1, type: 3}
+  - {fileID: 3894880375354682955, guid: 0c0ea431ace4f624895e2c41a184d71c, type: 3}
+  - {fileID: 336370967163032369, guid: 13063b8319347e2479e6af5ae4bf79ca, type: 3}
+  - {fileID: 8998803247781539246, guid: 967bda6cd12c7c34d852681f280bdfef, type: 3}
+  - {fileID: 6204463763682365560, guid: c7232173ec62a4648bc000bf0b5baf1a, type: 3}
+  - {fileID: 5723697036167094182, guid: 90eef2986e5621946bc6c49fa7c1bb59, type: 3}
+  - {fileID: 337297917773548205, guid: e3a10d9641710d041a51eb9a528a6e9a, type: 3}
+  - {fileID: 1000013650473748, guid: 1ab6ed6db0b83984bb512a33711b213f, type: 3}
+  - {fileID: 1000011322177112, guid: 4f544c14cf326b843a5f07e7de41640e, type: 3}
+  - {fileID: 1000011827300634, guid: ff586fe8e17ca3a4d9669e3c824a0e29, type: 3}
+  - {fileID: 1000012400448258, guid: 9b21be590f33e0d4ba19fec73ce555da, type: 3}
+  - {fileID: 1000014030850534, guid: 308c89097ca814e44b0ff03d3c0c633b, type: 3}
+  - {fileID: 1000013122234568, guid: 87a32384fe2633648996ab825d5f4b5b, type: 3}
+  - {fileID: 1000011003416750, guid: 78dec3a2e9e50fc46882f9cc3751f692, type: 3}

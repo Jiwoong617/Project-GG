@@ -8,6 +8,7 @@ public class PlayerController : BaseController
 {
     public PlayerStat stat = new();
     public Vector3 moveDir;
+    public bool isAlive = true;
 
     [SerializeField] private Animator animator;
     [SerializeField] private AnimationClip AttackClip;
@@ -61,7 +62,16 @@ public class PlayerController : BaseController
 
     protected override void OnDie()
     {
+        animator.Play(ANIM_DEATH);
+        animator.Play(ANIM_DEATH, 1);
+        isAlive = false;
+    }
 
+    public override void OnAttacked(Stat s)
+    {
+        stat.TakeDamage(s);
+        if (stat.Hp <= 0)
+            state = State.Die;
     }
 
     public void SetDir(Vector3 dir) => moveDir = dir;
@@ -71,7 +81,7 @@ public class PlayerController : BaseController
     {
         Collider[] col = Physics.OverlapBox(transform.position + transform.forward*2 + Vector3.up, new Vector3(1, 0.5f, 1), transform.rotation, 1<< LayerMask.NameToLayer("Monster"));
         //if (col.Length > 0) Debug.Log(col.Length);
-        Debug.Log("attack");
+        //Debug.Log("attack");
         foreach(Collider c in col)
         {
             c.GetComponent<BaseController>().OnAttacked(stat);

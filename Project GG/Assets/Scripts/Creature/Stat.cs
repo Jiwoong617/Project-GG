@@ -19,14 +19,7 @@ public class Stat
         Hp -= damage;
 
         if (Hp <= 0)
-        {
             Hp = 0;
-            OnDead();
-        }
-    }
-
-    public virtual void OnDead()
-    {
     }
 
     public void SetStat(StatInfo status)

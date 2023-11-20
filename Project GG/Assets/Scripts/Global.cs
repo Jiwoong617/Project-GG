@@ -8,6 +8,7 @@ public static class Global
     public static int mapSize = 30;
 
     public static GameObject Player;
+    public static Spawner Spawner;
 
     public static Action CameraShake;
 }

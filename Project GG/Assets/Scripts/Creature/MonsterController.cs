@@ -9,19 +9,18 @@ public class MonsterController : BaseController
     public bool isFree = true;
 
     Stat stat = new();
-    Animator animator;
     [SerializeField] GameObject target;
 
     [SerializeField]
-    protected float attackRange = 1f;
+    protected float attackRange = 0.5f;
 
     float distance;
     Vector3 originVect;
+    private Coroutine attackCo;
 
     private void Start()
     {
-        //animator = GetComponent<Animator>();
-        originVect = transform.position;
+        originVect = transform.localScale;
     }
 
     public void Init(Vector3 pos, StatInfo status)
@@ -38,6 +37,9 @@ public class MonsterController : BaseController
 
     protected override void OnMoving()
     {
+        if (!target.GetComponent<PlayerController>().isAlive)
+            return;
+
         distance = (target.transform.position - transform.position).magnitude;
 
         if (target != null)
@@ -45,7 +47,6 @@ public class MonsterController : BaseController
             if (distance <= attackRange)
             {
                 Attack();
-
                 return;
             }
         }
@@ -75,12 +76,14 @@ public class MonsterController : BaseController
 
     private void Attack()
     {
-    //    Vector3 dir = target.transform.position - transform.position;
-    //    dir.y = transform.position.y;
-    //    transform.rotation = Quaternion.LookRotation(dir);
-    //    animator.CrossFade("Attack", 0.1f);
-    //    //히트 관련
-    //    transform.GetChild(0).GetComponent<Collider>().enabled = true;
+        if(attackCo == null)
+            attackCo = StartCoroutine(AttackMotion());
+        //    Vector3 dir = target.transform.position - transform.position;
+        //    dir.y = transform.position.y;
+        //    transform.rotation = Quaternion.LookRotation(dir);
+        //    animator.CrossFade("Attack", 0.1f);
+        //    //히트 관련
+        //    transform.GetChild(0).GetComponent<Collider>().enabled = true;
     }
 
     public override void OnAttacked(Stat s)
@@ -90,10 +93,18 @@ public class MonsterController : BaseController
             state = State.Die;
     }
 
-    IEnumerator MoveMotion()
+    IEnumerator AttackMotion()
     {
-        transform.DOPunchScale(Vector3.one, 2f, 2).OnComplete(() => transform.position = originVect);
-        yield return new WaitForSeconds(2f);
+        transform.DOPunchScale(Vector3.one, 0.5f, 7).OnComplete(() => transform.localScale = originVect);
+        Collider[] col = Physics.OverlapSphere(transform.position, 1, 1<< LayerMask.NameToLayer("Player"));
+        foreach(Collider c in col)
+        {
+            c.GetComponent<BaseController>().OnAttacked(stat);
+            Debug.Log(c.name);
+        }
+
+        yield return new WaitForSeconds(1f);
+        attackCo = null;
     }
 }
     
