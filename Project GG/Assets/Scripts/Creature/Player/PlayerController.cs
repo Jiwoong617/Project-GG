@@ -62,9 +62,12 @@ public class PlayerController : BaseController
 
     protected override void OnDie()
     {
+        state = State.None;
         animator.Play(ANIM_DEATH);
         animator.Play(ANIM_DEATH, 1);
         isAlive = false;
+
+        GameManager.Instance.GameOver();
     }
 
     public override void OnAttacked(Stat s)

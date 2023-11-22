@@ -69,6 +69,7 @@ public class MonsterController : BaseController
     protected override void OnDie()
     {
         isFree = true;
+        attackCo = null;
         gameObject.SetActive(false);
     }
 
@@ -100,7 +101,7 @@ public class MonsterController : BaseController
         foreach(Collider c in col)
         {
             c.GetComponent<BaseController>().OnAttacked(stat);
-            Debug.Log(c.name);
+            //Debug.Log(c.name);
         }
 
         yield return new WaitForSeconds(1f);

@@ -17,8 +17,11 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.player == null) return;
+
         Vector3 targetPos = Global.Player.transform.position;
-        transform.position = Vector3.Lerp(transform.position, targetPos + Offset, bias * Time.deltaTime);
+        transform.position = targetPos + Offset;
+        //transform.position = Vector3.Lerp(transform.position, targetPos + Offset, bias * Time.deltaTime);
     }
 
     private void CamShake()
