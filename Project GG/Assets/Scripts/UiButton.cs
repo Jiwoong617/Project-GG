@@ -14,12 +14,15 @@ public class UiButton : MonoBehaviour
     {
 
     }
-    protected void Awake()
+    protected virtual void Start()
     {
-        button = GetComponent<Button>();
-        button.onClick.AddListener(() =>
+        if(TryGetComponent<Button>(out Button bt))
         {
-            buttonFunc();
-        });
+            button = bt;
+            button.onClick.AddListener(() =>
+            {
+                buttonFunc();
+            });
+        }
     }
 }
