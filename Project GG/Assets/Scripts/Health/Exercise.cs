@@ -5,9 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="Exercise")]
 public class Exercise : ScriptableObject
 {
-    public string name;
+    public string title;
     public BodyParts part;
     public int exp;
-    public string imgLoc;
-    public string description;
+    [TextArea] public string description;
 }

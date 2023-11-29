@@ -67,7 +67,7 @@ public class PlayerController : BaseController
         animator.Play(ANIM_DEATH, 1);
         isAlive = false;
 
-        GameManager.Instance.GameOver();
+        Manager.Game.GameOver();
     }
 
     public override void OnAttacked(Stat s)

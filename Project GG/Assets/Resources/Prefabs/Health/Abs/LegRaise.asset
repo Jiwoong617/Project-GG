@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59fb3f73d461d5d4dacf7f0a220fca61, type: 3}
+  m_Name: LegRaise
+  m_EditorClassIdentifier: 
+  title: "\uB808\uADF8 \uB808\uC774\uC988"
+  part: 4
+  exp: 10
+  description: "1. \uBC14\uB85C \uB204\uC6B4\uC0C1\uD0DC\uC5D0\uC11C \uB2E4\uB9AC\uB97C
+    \uCB49 \uBED7\uACE0, \uD314\uC740 \uD3B8\uC548\uD558\uAC8C \uBAB8 \uC606\uCABD\uC73C\uB85C
+    \uB454\uB2E4.\r\n2. \uACE8\uBC18\uC744 \uC0B4\uC9DD \uD6C4\uBC18\uACBD\uC0AC\uC2DC\uCF1C
+    \uD5C8\uB9AC\uC640 \uBC14\uB2E5 \uC0AC\uC774\uC758 \uACF5\uAC04\uC774 \uC5C6\uB3C4\uB85D
+    \uD55C\uB2E4\r\n3. \uB2E4\uB9AC\uB97C \uACE7\uAC8C \uCC9C\uC7A5\uCABD\uC73C\uB85C
+    \uB545\uACFC \uC218\uC9C1\uC744 \uC774\uB8E8\uAC8C\uB054 \uB4E4\uC5B4\uC62C\uB9B0\uB2E4.\r\n4.
+    \uC544\uB798\uCABD \uB4F1\uC774 \uB545\uACFC \uB5A8\uC5B4\uC9C0\uC9C0 \uC54A\uB3C4\uB85D
+    \uC8FC\uC758\uD558\uBA70 \uB0B4\uB9B0\uB2E4."

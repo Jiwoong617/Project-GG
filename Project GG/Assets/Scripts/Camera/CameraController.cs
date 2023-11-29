@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.player == null) return;
+        if (Manager.Game.player == null) return;
 
         Vector3 targetPos = Global.Player.transform.position;
         transform.position = targetPos + Offset;

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59fb3f73d461d5d4dacf7f0a220fca61, type: 3}
+  m_Name: Lunge
+  m_EditorClassIdentifier: 
+  title: "\uB7F0\uC9C0"
+  part: 1
+  exp: 10
+  description: "1. \uC5B4\uAE68\uB108\uBE44 \uC815\uB3C4\uB85C \uB2E4\uB9AC\uB97C
+    \uBC8C\uB9B0\uB2E4.\r\n2. \uD55C \uB2E4\uB9AC\uB97C \uC55E\uC73C\uB85C \uBE7C\uC900\uB2E4.
+    \uC774 \uB54C \uB4A4\uC5D0\uC788\uB294 \uBC1C\uC758 \uB4A4\uAFC8\uCE58\uB294
+    \uB4E4\uC5B4\uC900\uB2E4.\r\n3. \uACE8\uBC18\uACFC \uC5B4\uAE68\uB97C \uC77C\uC9C1\uC120\uC73C\uB85C
+    \uB450\uACE0 \uADF8\uB300\uB85C \uB0B4\uB824\uAC14\uB2E4 \uC62C\uB77C\uC628\uB2E4.\r\n4.
+    \uBC18\uB300\uB3C4 \uAC19\uC740 \uBC29\uBC95\uC73C\uB85C \uBC18\uBCF5\uD55C\uB2E4.\r"

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59fb3f73d461d5d4dacf7f0a220fca61, type: 3}
+  m_Name: BicepsPushUp
+  m_EditorClassIdentifier: 
+  title: "\uBC14\uC774\uC149\uC2A4 \uD478\uC26C\uC5C5"
+  part: 0
+  exp: 10
+  description: "1. \uAE30\uC874\uC758 \uD478\uC26C\uC5C5 \uC790\uC138\uB97C \uC7A1\uB294\uB2E4.\r\n2.
+    \uC5C4\uC9C0\uC190\uAC00\uB77D\uC774 \uC624\uB978\uC190\uC740 3\uC2DC, \uC67C\uC190\uC740
+    9\uC2DC \uBC29\uD5A5\uC774 \uB418\uAC8C\uB054 \uC190\uC744 \uBC14\uAE65\uC73C\uB85C
+    \uB3CC\uB824\uC900\uB2E4.\r\n3. \uC774\uB450\uC758 \uC790\uADF9\uC744 \uB290\uB07C\uBA70
+    \uBD80\uB4DC\uB7FD\uAC8C \uC2E4\uC2DC\uD55C\uB2E4."

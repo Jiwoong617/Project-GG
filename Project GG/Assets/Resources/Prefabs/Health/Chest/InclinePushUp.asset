@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59fb3f73d461d5d4dacf7f0a220fca61, type: 3}
+  m_Name: InclinePushUp
+  m_EditorClassIdentifier: 
+  title: "\uC778\uD074\uB77C\uC778 \uD478\uC26C\uC5C5"
+  part: 3
+  exp: 10
+  description: "1. \uADC0\uC640 \uC5B4\uAE68\uB97C \uBA40\uB9AC\uD558\uACE0 \uC190\uBC14\uB2E5\uC744
+    \uB113\uAC8C \uD3B8 \uC0C1\uD0DC\uB85C\uC190\uC758 \uAC01\uB3C4\uB97C \uC57D\uAC04
+    \uBC14\uAE65\uC73C\uB85C \uBC8C\uB824 \uC5B4\uAE68\uB108\uBE44\uBCF4\uB2E4 \uB113\uAC8C
+    \uBC14\uB2E5\uC5D0 \uB454\uB2E4.\r\n2. \uC591\uD314\uC744 \uB2E4\uB9AC\uBCF4\uB2E4
+    \uB192\uC740 \uBB3C\uCCB4\uC5D0 \uC62C\uB9AC\uACE0 \uC815\uC218\uB9AC\uBD80\uD130
+    \uB4A4\uAFC8\uCE58\uAE4C\uC9C0 \uAE38\uAC8C \uB298\uC5EC \uBAB8\uD1B5\uC758 \uC911\uB9BD\uC744
+    \uC720\uC9C0\uD55C \uCC44\uB85C \uAF2C\uB9AC\uBF08\uB97C \uB465\uAE00\uAC8C \uB9D0\uC544
+    \uBB34\uB98E\uC744 \uD3B8\uB2E4\r\n3. \uBAB8\uC744 \uB0B4\uB9B4 \uB54C \uC228\uC744
+    \uB4E4\uC774\uC26C\uACE0, \uB4E4\uC5B4 \uC62C\uB9B4 \uB54C \uB0B4\uC270\uB2E4.\r"

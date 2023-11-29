@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59fb3f73d461d5d4dacf7f0a220fca61, type: 3}
+  m_Name: Crunch
+  m_EditorClassIdentifier: 
+  title: "\uD06C\uB7F0\uCE58"
+  part: 4
+  exp: 10
+  description: "1. \uBC14\uB2E5\uC5D0 \uB204\uC6CC\uC11C \uB2E4\uB9AC\uB97C \uACE0\uC815\uC2DC\uD0A4\uACE0
+    \uC2DC\uC120\uC740 \uC790\uC5F0\uC2A4\uB7FD\uAC8C \uBAB8\uC774 \uBC14\uB77C\uBCF4\uB294
+    \uBC29\uD5A5\uACFC \uAC19\uB3C4\uB85D \uD55C\uB2E4.\r\n2. \uACE8\uBC18\uC744
+    \uC0B4\uC9DD \uD6C4\uBC18\uACBD\uC0AC\uC2DC\uCF1C \uD5C8\uB9AC\uC640 \uBC14\uB2E5
+    \uC0AC\uC774\uC758 \uACF5\uAC04\uC774 \uC5C6\uB3C4\uB85D \uD55C\uB2E4.\r\n3.
+    \uC2DC\uC120\uC774 \uCC9C\uC7A5\uC744 \uD5A5\uD558\uBA74\uC11C \uBCF5\uADFC\uC744
+    \uC950\uC5B4\uC9DC\uB294 \uD798\uC73C\uB85C \uC0C1\uBC18\uC2E0\uC744 \uC801\uB2F9\uD788
+    \uB4E0\uB2E4. \uC774 \uB54C \uBA38\uB9AC\uB97C \uACFC\uB3C4\uD558\uAC8C \uB2F9\uAE30\uC9C0
+    \uC54A\uB294\uB2E4.\r\n4. \uB2E4\uC2DC 2\uBC88\uC758 \uC790\uC138\uB85C \uB3CC\uC544\uC628\uB2E4.\r\n5
+    .1 ~ 4 \uBC88\uC744 \uBC18\uBCF5\uD55C\uB2E4."

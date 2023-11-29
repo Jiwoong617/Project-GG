@@ -23,7 +23,7 @@ public enum BodyParts
     Leg,
     Back,
     Chest,
-    Shoulder,
+    Abs
 }
 public enum Gender
 {

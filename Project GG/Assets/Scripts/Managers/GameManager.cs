@@ -6,27 +6,28 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance = null;
     public GameObject player;
-    public static GameManager Instance
-    {
-        get
-        {
-            if (instance == null)
-                return null;
-            return instance;
-        }
-    }
 
-    private void Awake()
-    {
-        if(instance == null)
-            instance = this;
+    //private static GameManager instance = null;
+    //public static GameManager Instance
+    //{
+    //    get
+    //    {
+    //        if (instance == null)
+    //            return null;
+    //        return instance;
+    //    }
+    //}
 
-        GameStart();
-    }
+    //private void Awake()
+    //{
+    //    if(instance == null)
+    //        instance = this;
 
-    private void GameStart()
+    //    GameStart();
+    //}
+
+    public void GameStart()
     {
         // 실행 순서
         //나중에 find with tags로 찾는 것들 다 global로 참조하게 바꿀거임
@@ -49,10 +50,8 @@ public class GameManager : MonoBehaviour
         gameoverUI.GetComponent<TextMeshProUGUI>().DOFade(1, 3);
     }
 
-    private IEnumerator StartCount()
+    public IEnumerator StartCount()
     {
-
-
         yield return new WaitForSeconds(0.3f);
         TextMeshProUGUI text = GameObject.Find("StartCounter").GetComponent<TextMeshProUGUI>();
         text.color = new(1, 1, 1, 1);
