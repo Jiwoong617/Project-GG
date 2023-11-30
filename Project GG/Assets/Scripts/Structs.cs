@@ -31,6 +31,6 @@ public struct StatInfo
 
 public struct RoutineJson
 {
-    public List<string> name;
-    public List<int> times;
+    public string name;
+    public int times;
 }

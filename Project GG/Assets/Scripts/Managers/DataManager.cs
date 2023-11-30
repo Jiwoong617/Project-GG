@@ -9,6 +9,7 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     private string dataPath = Path.Combine(Application.persistentDataPath, "RoutineData.json");
+
     public void RoutineSerialize(RoutineJson _routineJson)
     {
         string json = JsonConvert.SerializeObject(_routineJson);
