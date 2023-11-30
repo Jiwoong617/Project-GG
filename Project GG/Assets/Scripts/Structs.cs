@@ -31,6 +31,6 @@ public struct StatInfo
 
 public struct RoutineStruct
 {
-    public string name;
+    public string title;
     public int times;
 }
