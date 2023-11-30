@@ -7,6 +7,7 @@ public class Exercise : ScriptableObject
 {
     public string title;
     public BodyParts part;
+    public int times;
     public int exp;
     [TextArea] public string description;
 }
