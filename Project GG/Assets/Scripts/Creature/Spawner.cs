@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     public Coroutine spawnCo;
 
     [SerializeField] GameObject monster;
-    [SerializeField] EnemyList enemyList;
+    [SerializeField] ObjectHolder objectHolder;
     [SerializeField] float distance = 20f;
 
     private List<MonsterController> pool = new();
@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
     {
         Vector3 pos = GetSpawnPos();
         MonsterController mc = GetClone(monster);
-        Instantiate(enemyList.EnemyPref[Random.Range(0, enemyList.EnemyPref.Count)], mc.transform);
+        Instantiate(objectHolder.HoldingObjects[Random.Range(0, objectHolder.HoldingObjects.Count)], mc.transform);
 
         //юс╫ц
         mc.Init(pos, new StatInfo(100, 100, 100, 100, 5));

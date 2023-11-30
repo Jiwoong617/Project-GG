@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: "\uD480\uC5C5"
   part: 2
-  exp: 10
+  times: 0
+  exp: 2
   description: "1. \uD480\uC5C5\uBC14\uB97C \uC5B4\uAE68\uB108\uBE44\uBCF4\uB2E4
     \uC57D\uAC04 \uB113\uAC8C \uC190\uB4F1\uC774 \uBAB8 \uCABD\uC744 \uD5A5\uD558\uAC8C
     \uC7A1\uB294\uB2E4.\n2.\uC5B4\uAE68\uC758 \uD798\uC744 \uC644\uC804\uD788 \uD480\uC5B4\uB193\uC740
