@@ -28,3 +28,9 @@ public struct StatInfo
         this.moveSpeed = moveSpeed;
     }
 }
+
+public struct RoutineJson
+{
+    public List<string> name;
+    public List<int> times;
+}

@@ -1,21 +1,33 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    public void RoutineSerialize(Dictionary<string, int> _data)
+    private string dataPath = Path.Combine(Application.persistentDataPath, "RoutineData.json");
+    public void RoutineSerialize(RoutineJson _routineJson)
     {
-        string routineJson = _data.ToString();
+        string json = JsonConvert.SerializeObject(_routineJson);
+        File.WriteAllText(dataPath, json);
     }
-    public void RoutineDeserialize(string _json)
+    public RoutineJson RoutineDeserialize()
     {
-        //Routine의 데이터 형식은 List<int>로 인덱스를 통해 접근 후 벨류값을 찾는 형식으로 구현
-        List<int> routineList = Array.ConvertAll(_json.Split(','), int.Parse).ToList();
-        
+        RoutineJson routineJson = new RoutineJson();
+        if (File.Exists(dataPath))
+        {
+            string json = File.ReadAllText(dataPath);
+            routineJson = JsonConvert.DeserializeObject<RoutineJson>(json);
+        }
+        else
+        {
+            //파일이 존재하지 않은 경우, 처음 생성시
+            Debug.LogError(dataPath + " 해당 파일이 존재하지 않습니다.");
+        }
+        return routineJson;
     }
     // JSON 데이터 파싱
     // 1. 직접 만든 루틴
