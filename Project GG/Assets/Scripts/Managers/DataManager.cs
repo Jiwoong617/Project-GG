@@ -37,7 +37,7 @@ public class DataManager : MonoBehaviour
         RoutineStruct routineData = new RoutineStruct();
         foreach(Exercise exercise in _exercises)
         {
-            routineData.title = exercise.title;
+            routineData.name = exercise.name;
             routineData.times = exercise.times;
             routineList.Add(routineData);
         }
