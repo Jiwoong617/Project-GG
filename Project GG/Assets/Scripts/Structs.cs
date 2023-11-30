@@ -29,7 +29,7 @@ public struct StatInfo
     }
 }
 
-public struct RoutineJson
+public struct RoutineStruct
 {
     public string name;
     public int times;
