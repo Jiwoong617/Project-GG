@@ -18,22 +18,20 @@ using UnityEngine.EventSystems;
 
 public class FBManager : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_InputField idField;
-    [SerializeField]
-    private TMP_InputField pwField;
-
     private string path;
     private DatabaseReference reference;
-    public void Register(string _id, string _pw)
+    private bool checker;
+    public async Task Register(string _id, string _pw)
     {
+        checker = false;
         if(CheckValidId(_id) == false)
         {
             // 유효하지 않은 아이디라고 알림, 기능 종료
             Debug.LogError("invalid id");
             return;
         }
-        if(IsSameId(_id))
+        await IsSameId(_id);
+        if (checker)
         {
             //같은 아이디가 있다고 알림, 기능 종료
             Debug.LogError("same id");
@@ -41,10 +39,31 @@ public class FBManager : MonoBehaviour
         }
         // 문제 없다면 회원가입, 완료 알림
         NewUserUserDataUpload(_id, _pw);
+        Debug.Log("register success");
     }
-    public void Login(string _id, string _pw)
+    public async Task Login(string _id, string _pw)
     {
-        //로그인 후 씬 전환 혹은 UI변환이 필요
+        IDictionary data = null;
+        Task myTask = UserDataLoad(dataVarType.Id, _id, data);
+        await myTask;
+        Debug.Log(data);
+        if(data == null)
+        {
+            // 회원가입이 되지 않은 Id, 회원가입 알림 띄우기
+            return;
+        }
+        string inputPw = (string)data[dataVarType.Pw.ToString()];
+        Debug.Log(inputPw + ", "+ _pw);
+        if(inputPw == _pw)
+        {
+            // 비밀번호가 같으면 로그인, 화면 전환
+            Debug.Log("Login success");
+        }
+        else
+        {
+            // 다르다면 오류 메세지
+            return;
+        }
     }
     public bool CheckValidId(string _id)
     {
@@ -56,17 +75,23 @@ public class FBManager : MonoBehaviour
             if (invalidString.Contains(splitedId[i]))
             {
                 // 특수문자 사용불가 알림
+                Debug.LogError("can't use special symbols");
                 return false;
             }
         }
+        if(_id == null || _id =="")
+        {
+            // 공백 아이디 사용불가 알림
+            Debug.LogError("can't use blank Id");
+            return false;
+        }
         return true;
     }
-    public bool IsSameId(string _id)
+    public async Task IsSameId(string _id)
     {
-        if (_id == null) return true; // 아이디가 공백
-        bool checker = false;
         IDictionary searchData = null;
-        reference.Child("UserData").GetValueAsync().ContinueWith(task =>
+        if (reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference; // 왜 레퍼런스가 null로 뜨지?
+        await reference.Child("UserData").GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
@@ -76,11 +101,10 @@ public class FBManager : MonoBehaviour
                     searchData = (IDictionary)data.Value;
                     string targetId = (string)searchData["Id"];
                     if (targetId == _id) checker = true;
-                    else checker = false;
                 }
             }
         });
-        return checker;
+        return;
     }
     public void NewUserUserDataUpload(string _id, string _pw)
     {
@@ -96,30 +120,34 @@ public class FBManager : MonoBehaviour
         string json = JsonConvert.SerializeObject(newUserData);
         reference.Child("UserData").Child(newUserData.returnUID()).SetRawJsonValueAsync(json);
     }
-    public IDictionary UserDataLoad(string _uid)
+    public async Task UserDataLoad(dataVarType _type, string _value, IDictionary _data)
     {
-        if (_uid == null)
+        if(_type == dataVarType.UID)
         {
-            Debug.LogError("UID is null");
-            return null;
+            if (_value == null)
+            {
+                Debug.LogError("UID is null");
+                return;
+            }
         }
-        IDictionary outData = null;
-        reference.Child("UserData").GetValueAsync().ContinueWith(task =>
+        if(reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference;
+        await reference.Child("UserData").GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
                 foreach (DataSnapshot data in snapshot.Children)
                 {
-                    if (data.Key == _uid)
-                        outData = (IDictionary)data.Value;
+                    IDictionary targetData = (IDictionary)data.Value;
+                    string targetValue = (string)targetData[_type.ToString()];
+                    if (targetValue == _value) _data = targetData;
                 }
             }
-            Debug.Log(outData);
         });
-        return outData;
+        Debug.Log(_data);
+        return;
     }
-    private void Start()
+    private void Awake()
     {
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         path = Path.Combine(Application.dataPath, "uid.json");

@@ -30,3 +30,15 @@ public enum Gender
     Man,
     Woman,
 }
+
+public enum dataVarType
+{
+    Id,
+    Pw,
+    Name,
+    Gender,
+    UID,
+    BodyLevelArray,
+    BodyExpArray,
+    BodyMaxExpArray,
+}
