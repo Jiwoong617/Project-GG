@@ -41,10 +41,12 @@ public class Manager : MonoBehaviour
     GameManager _game = new GameManager();
     HealthManager _health = new HealthManager();
     DataManager _data = new DataManager();
+    FBManager _fb = new FBManager();
 
     public static GameManager Game { get { return Instance._game; } }
     public static HealthManager Health { get { return Instance._health; } }
     public static DataManager Data { get {  return Instance._data; } }
+    public static FBManager FBManager { get { return Instance._fb;} }
 
     public void ChangeScene(SceneList type) => SceneType = type;
 }
