@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59fb3f73d461d5d4dacf7f0a220fca61, type: 3}
-  m_Name: SpikePushUp
+  m_Name: PikePushUp
   m_EditorClassIdentifier: 
-  title: "\uC2A4\uD30C\uC774\uD06C \uD478\uC2DC\uC5C5"
+  title: "\uD30C\uC774\uD06C \uD478\uC2DC\uC5C5"
   part: 0
   times: 0
   exp: 2
+  img: {fileID: 21300000, guid: 9b195b6c8e97860469a9e8754cf46490, type: 3}
   description: "1. \uC77C\uBC18 \uD478\uC26C\uC5C5 \uC790\uC138\uC5D0\uC11C \uC591\uC190\uC744
     \uC5B4\uAE68\uBCF4\uB2E4 \uC57D\uAC04 \uB113\uAC8C \uBC8C\uB9B0\uB2E4.\r\n2.
     \uB2E4\uB9AC\uB97C \uC55E\uCABD\uC73C\uB85C \uC774\uB3D9\uC2DC\uD0A4\uACE0 \uACE8\uBC18\uC744

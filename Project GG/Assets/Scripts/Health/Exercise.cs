@@ -9,5 +9,6 @@ public class Exercise : ScriptableObject
     public BodyParts part;
     public int times;
     public int exp;
+    public Sprite img;
     [TextArea] public string description;
 }

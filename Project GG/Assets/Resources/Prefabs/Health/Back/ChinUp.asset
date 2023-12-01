@@ -16,6 +16,7 @@ MonoBehaviour:
   part: 2
   times: 0
   exp: 2
+  img: {fileID: 21300000, guid: a570f2be3a90f38429d6545be0f9b9a3, type: 3}
   description: "1. \uD480\uC5C5\uBC14\uB97C \uC5B4\uAE68\uBCF4\uB2E4 \uC57D\uAC04
     \uC881\uAC8C \uC7A1\uC73C\uBA70 \uC190\uBC14\uB2E5\uBA74\uC774 \uBAB8 \uCABD\uC744
     \uD5A5\uD558\uAC8C \uC7A1\uB294\uB2E4. \n2.\uC5B4\uAE68\uC758 \uD798\uC744 \uC644\uC804\uD788
