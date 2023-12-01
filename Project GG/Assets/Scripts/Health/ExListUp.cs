@@ -8,7 +8,6 @@ public class ExListUp : MonoBehaviour
 {
     [SerializeField] GameObject ExerciseList;
     [SerializeField] GameObject ExerciseUI;
-    private int count = 0;
 
     public void OnClickedBodyParts()
     {
@@ -21,6 +20,7 @@ public class ExListUp : MonoBehaviour
         {
             Exercise ex = o as Exercise;
             ExerciseUI go = Instantiate(ExerciseUI, ExerciseList.transform).GetComponent<ExerciseUI>();
+            go.parent = ExerciseList.transform.parent.parent;
             go.ex = ex;
             go.title.text = ex.title;
             go.img.sprite = ex.img;

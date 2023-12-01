@@ -289,6 +289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b0d89439289d540a007af31468d8d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
   ex: {fileID: 0}
   title: {fileID: 4467501544355445107}
   img: {fileID: 4500373523740765008}
+  ExInfo: {fileID: 4106692647636626726, guid: c4f6fa42447995a46bf8f9be2598d178, type: 3}
