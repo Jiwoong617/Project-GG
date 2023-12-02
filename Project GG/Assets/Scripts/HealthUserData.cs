@@ -49,9 +49,9 @@ public class HealthUserData
         }
         // 레벨업 기능
         int arraySize = BodyLevelArray.Length;
-        for(int i = 0; i< arraySize; i++)
+        for(int i = 0; i < arraySize; i++)
         {
-            if (BodyExpArray[i] >= BodyMaxExpArray[i])
+            while(BodyExpArray[i] >= BodyMaxExpArray[i])
             {
                 BodyLevelArray[i] += 1;
                 BodyExpArray[i] -= BodyMaxExpArray[i];
