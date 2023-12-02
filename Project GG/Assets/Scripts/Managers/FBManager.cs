@@ -15,12 +15,14 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine.Analytics;
 using UnityEngine.EventSystems;
+using Newtonsoft.Json.Linq;
 
 public class FBManager : MonoBehaviour
 {
     private string path;
     private DatabaseReference reference;
     private bool checker;
+    IDictionary Idict;
     public async Task Register(string _id, string _pw)
     {
         checker = false;
@@ -38,21 +40,20 @@ public class FBManager : MonoBehaviour
             return;
         }
         // 문제 없다면 회원가입, 완료 알림
-        NewUserUserDataUpload(_id, _pw);
+        NewUserDataUpload(_id, _pw);
         Debug.Log("register success");
     }
     public async Task Login(string _id, string _pw)
     {
-        IDictionary data = null;
-        Task myTask = UserDataLoad(dataVarType.Id, _id, data);
-        await myTask;
-        Debug.Log(data);
-        if(data == null)
+        Idict = null;
+        await UserDataLoad(dataVarType.Id, _id);
+        Debug.Log(Idict);
+        if(Idict == null)
         {
             // 회원가입이 되지 않은 Id, 회원가입 알림 띄우기
             return;
         }
-        string inputPw = (string)data[dataVarType.Pw.ToString()];
+        string inputPw = (string)Idict[dataVarType.Pw.ToString()];
         Debug.Log(inputPw + ", "+ _pw);
         if(inputPw == _pw)
         {
@@ -106,7 +107,7 @@ public class FBManager : MonoBehaviour
         });
         return;
     }
-    public void NewUserUserDataUpload(string _id, string _pw)
+    public void NewUserDataUpload(string _id, string _pw)
     {
         string uid = Guid.NewGuid().ToString(); // 새로운 uid를 생성
         //// json으로 변환
@@ -115,12 +116,87 @@ public class FBManager : MonoBehaviour
         //File.WriteAllText(path, uidJson);
 
         string name = null;
-        bool gender = false;
+        string gender = Gender.Man.ToString();
         HealthUserData newUserData = new HealthUserData(name, gender, uid, _id, _pw);
         string json = JsonConvert.SerializeObject(newUserData);
         reference.Child("UserData").Child(newUserData.returnUID()).SetRawJsonValueAsync(json);
     }
-    public async Task UserDataLoad(dataVarType _type, string _value, IDictionary _data)
+    public async void UserDataEdit(dataVarType _type, string _value, string _uid)
+    {
+        Idict = null;
+        if (reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference;
+        await reference.Child("UserData").GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                foreach (DataSnapshot data in snapshot.Children)
+                {
+                    if(data.Key == _uid)
+                        Idict = (IDictionary)data.Value;
+                }
+            }
+        });
+        // string은 참조형이라 작성함, 문제 있는지 확인 안함
+        string id = (string)Idict[dataVarType.Id.ToString()];
+        string pw = (string)Idict[dataVarType.Pw.ToString()];
+        string name = (string)Idict[dataVarType.Name.ToString()];
+        string gender = (string)Idict[dataVarType.Gender.ToString()];
+        string uid = (string)Idict[dataVarType.UID.ToString()];
+
+        string targetValue;
+        switch(_type)
+        {
+            case dataVarType.Id:
+                targetValue = id;
+                break;
+            case dataVarType.Pw:
+                targetValue = pw;
+                break;
+            case dataVarType.Name:
+                targetValue = name;
+                break;
+            case dataVarType.Gender:
+                targetValue = gender;
+                break;
+            case dataVarType.UID:
+                targetValue = uid;
+                break;
+        }
+        targetValue = _value;
+        HealthUserData targetData = new HealthUserData(name, gender, uid, id, pw);
+        string json = JsonConvert.SerializeObject(targetData);
+        await reference.Child("UserData").Child(targetData.returnUID()).SetRawJsonValueAsync(json);
+    }
+    public async void UserDataEdit(dataVarType _type, int[] _value, string _uid)
+    {
+        Idict = null;
+        if (reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference;
+        await reference.Child("UserData").GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                foreach (DataSnapshot data in snapshot.Children)
+                {
+                    if (data.Key == _uid)
+                        Idict = (IDictionary)data.Value;
+                }
+            }
+        });
+        // string은 참조형이라 작성함, 문제 있는지 확인 안함
+        string id = (string)Idict[dataVarType.Id.ToString()];
+        string pw = (string)Idict[dataVarType.Pw.ToString()];
+        string name = (string)Idict[dataVarType.Name.ToString()];
+        string gender = (string)Idict[dataVarType.Gender.ToString()];
+        string uid = (string)Idict[dataVarType.UID.ToString()];
+
+        HealthUserData targetData = new HealthUserData(name, gender, uid, id, pw);
+        targetData.arrayEdit(_type, _value);
+        string json = JsonConvert.SerializeObject(targetData);
+        await reference.Child("UserData").Child(targetData.returnUID()).SetRawJsonValueAsync(json);
+    }
+    public async Task UserDataLoad(dataVarType _type, string _value)
     {
         if(_type == dataVarType.UID)
         {
@@ -140,11 +216,11 @@ public class FBManager : MonoBehaviour
                 {
                     IDictionary targetData = (IDictionary)data.Value;
                     string targetValue = (string)targetData[_type.ToString()];
-                    if (targetValue == _value) _data = targetData;
+                    if (targetValue == _value) Idict = targetData;
                 }
             }
         });
-        Debug.Log(_data);
+        Debug.Log(Idict);
         return;
     }
     private void Awake()

@@ -28,21 +28,21 @@ public class UiBt : MonoBehaviour
             }
         }
     }
-    public void LoginBt()
+    public async void LoginBt()
     {
         Transform registerCanvas = GameObject.Find("RegisterCanvas").transform;
         TMP_InputField idField = registerCanvas.Find("SignInFrame/IdInput").GetComponent<TMP_InputField>();
         TMP_InputField pwField = registerCanvas.Find("SignInFrame/PwInput").GetComponent<TMP_InputField>();
 
-        Manager.FBManager.Login(idField.text, pwField.text);
+        await Manager.FBManager.Login(idField.text, pwField.text);
     }
-    public void RegisterBt()
+    public async void RegisterBt()
     {
         Transform registerCanvas = GameObject.Find("RegisterCanvas").transform;
         TMP_InputField idField = registerCanvas.Find("SignInFrame/IdInput").GetComponent<TMP_InputField>();
         TMP_InputField pwField = registerCanvas.Find("SignInFrame/PwInput").GetComponent<TMP_InputField>();
 
-        Manager.FBManager.Register(idField.text, pwField.text);
+        await Manager.FBManager.Register(idField.text, pwField.text);
     }
     private void Awake()
     {

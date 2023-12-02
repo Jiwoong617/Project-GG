@@ -20,7 +20,7 @@ public class TestBt : MonoBehaviour
     private string name;
 
     private Toggle genderToggle;
-    private bool gender;
+    private string gender;
 
     DatabaseReference reference;
 
@@ -46,8 +46,7 @@ public class TestBt : MonoBehaviour
         name = nameInput.text;
         string id = null;
         string pw = null;
-        if (genderToggle.isOn == false) gender = false;
-        else gender = true;
+        gender = Gender.Man.ToString();
 
         HealthUserData newUserData = new HealthUserData(name, gender,uid, id, pw);
         string json = JsonConvert.SerializeObject(newUserData);
