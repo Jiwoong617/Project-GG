@@ -13,16 +13,8 @@ public class Stat
     public int Defence { get { return stat.defence; } set { stat.defence = value; } }
     public float MoveSpeed { get { return stat.moveSpeed; } set { stat.moveSpeed = value; } }
 
-    public virtual void TakeDamage(Stat attacker)
-    {
-        int damage = attacker.Attack;
-        Hp -= damage;
 
-        if (Hp <= 0)
-            Hp = 0;
-    }
-
-    public void SetStat(StatInfo status)
+    public virtual void SetStat(StatInfo status)
     {
         Hp = status.hp;
         MaxHp = status.maxHp;

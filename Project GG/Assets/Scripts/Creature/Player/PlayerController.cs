@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -30,7 +31,7 @@ public class PlayerController : BaseController
         animator = GetComponent<Animator>();
 
         //임시
-        stat.SetStat(new StatInfo(100, 100, 100, 100, 10));
+        stat.SetStat(new StatInfo(100, 100, 100, 0, 10));
     }
 
 
@@ -72,9 +73,15 @@ public class PlayerController : BaseController
 
     public override void OnAttacked(Stat s)
     {
-        stat.TakeDamage(s);
+        int damage = s.Attack;
+        stat.Hp -= Mathf.Clamp(damage - stat.Defence, 0, int.MaxValue);
+
         if (stat.Hp <= 0)
+        {
             state = State.Die;
+            stat.Hp = 0;
+        }
+        hpBar.value = (float)stat.Hp / stat.MaxHp;
     }
 
     public void SetDir(Vector3 dir) => moveDir = dir;

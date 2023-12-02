@@ -33,4 +33,10 @@ public struct RoutineStruct
 {
     public string name;
     public int times;
+    
+    public RoutineStruct(string name, int times)
+    {
+        this.name = name;
+        this.times = times;
+    }
 }

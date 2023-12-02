@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseController : MonoBehaviour
 {
     [SerializeField]
     protected State state = State.Idle;
+    [SerializeField]
+    protected Slider hpBar;
 
     protected void Update()
     {

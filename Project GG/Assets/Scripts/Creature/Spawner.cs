@@ -28,7 +28,9 @@ public class Spawner : MonoBehaviour
         MonsterController mc = GetClone(monster);
         Instantiate(objectHolder.HoldingObjects[Random.Range(0, objectHolder.HoldingObjects.Count)], mc.transform);
 
-        mc.Init(pos, new StatInfo(100, 100, 5, 0, 5));
+        int hp = Random.Range(90, 120);
+        int atk = Random.Range(3, 10);
+        mc.Init(pos, new StatInfo(hp, hp, atk, 0, Random.Range(3, 8)));
     }
 
     private MonsterController GetClone(GameObject go)

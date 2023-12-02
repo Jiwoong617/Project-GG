@@ -7,21 +7,24 @@ using UnityEngine.SceneManagement;
 
 public class HealthManager : MonoBehaviour
 {
-    string path;
-    public List<RoutineStruct> routines = new List<RoutineStruct>();
-    public List<Exercise> exercises = new List<Exercise>();
+    public string path;
+    public List<RoutineStruct> routines;
 
-    public void ExerciseInRoutine()
+    public List<Exercise> ExerciseInRoutine()
     {
-        routines = Manager.Data.RoutineDeserialize();
+        List<Exercise> exercises = new();
         ObjectHolder exerciseList = Resources.Load<ObjectHolder>("Prefabs/Health/ExerciseList");
 
         foreach(RoutineStruct routine in routines)
         {
             string name = routine.name;
             Exercise exercise = exerciseList.HoldingObjects.Find(x => x.name == name) as Exercise;
-            exercises.Add(exercise);
+
+            Exercise ex = new Exercise(exercise.title, exercise.part, exercise.times, exercise.exp, exercise.img, exercise.description); ;
+            ex.times = routine.times;
+            exercises.Add(ex);
         }
+        return exercises;
     }
     public async void HealthUiSync()
     {
@@ -51,9 +54,5 @@ public class HealthManager : MonoBehaviour
             healthUis.Add(GameObject.Find(uiPath + "LegLv"));
 
         }
-    }
-    private void Awake()
-    {
-        path = Path.Combine(Application.dataPath, "uid.json");
     }
 }

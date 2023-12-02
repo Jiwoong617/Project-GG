@@ -10,11 +10,6 @@ public class CameraController : MonoBehaviour
 
     private float bias = 5f;
 
-    private void Awake()
-    {
-        Global.CameraShake = CamShake;
-    }
-
     private void Update()
     {
         if (Manager.Game.player == null) return;
@@ -24,9 +19,4 @@ public class CameraController : MonoBehaviour
         //transform.position = Vector3.Lerp(transform.position, targetPos + Offset, bias * Time.deltaTime);
     }
 
-    private void CamShake()
-    {
-        transform.DORewind();
-        transform.DOShakePosition(0.2f, new Vector3(0.03f, 0.03f, 0), 25);
-    }
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    private string dataPath; // 파일의 경로, 이벤트 함수(하단)에서 Awake
+    public string dataPath; // 파일의 경로, 이벤트 함수(하단)에서 Awake
 
     //private void testCode()
     //{
@@ -62,10 +62,6 @@ public class DataManager : MonoBehaviour
             Debug.LogError(dataPath + " 해당 파일이 존재하지 않습니다.");
         }
         return routineList;
-    }
-    private void Awake()
-    {
-        dataPath = Path.Combine(Application.persistentDataPath, "RoutineData.json");
     }
     // JSON 데이터 파싱
     // 1. 직접 만든 루틴

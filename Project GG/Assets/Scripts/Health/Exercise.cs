@@ -11,4 +11,14 @@ public class Exercise : ScriptableObject
     public int exp;
     public Sprite img;
     [TextArea] public string description;
+
+    public Exercise(string title, BodyParts part , int times, int exp, Sprite img, string description)
+    {
+        this.title = title;
+        this.part = part;
+        this.times = times;
+        this.exp = exp;
+        this.img = img;
+        this.description = description;
+    }
 }

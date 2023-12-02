@@ -9,7 +9,5 @@ public static class Global
 
     public static GameObject Player;
     public static Spawner Spawner;
-
-    public static Action CameraShake;
 }
 

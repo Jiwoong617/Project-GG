@@ -89,9 +89,15 @@ public class MonsterController : BaseController
 
     public override void OnAttacked(Stat s)
     {
-        stat.TakeDamage(s);
+        int damage = s.Attack;
+        stat.Hp -= Mathf.Clamp(damage - stat.Defence, 0, int.MaxValue);
+
         if (stat.Hp <= 0)
+        {
             state = State.Die;
+            stat.Hp = 0;
+        }
+        hpBar.value = stat.Hp / stat.MaxHp;
     }
 
     IEnumerator AttackMotion()

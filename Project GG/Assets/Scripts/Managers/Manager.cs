@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,10 +28,14 @@ public class Manager : MonoBehaviour
             GameObject go = Instantiate(new GameObject("GameManager"), transform);
             _game = go.AddComponent<GameManager>();
             DontDestroyOnLoad(gameObject);
+
             SceneManager.sceneLoaded += OnSceneChanged;
+            Data.dataPath = Path.Combine(Application.dataPath, "Resources/RoutineData.json");
+            Health.path = Path.Combine(Application.dataPath, "uid.json");
+            Health.routines = new();
+            //Health.routines = Data.RoutineDeserialize();
         }
         else { Destroy(gameObject); return; }
-
     }
 
 
@@ -51,5 +56,7 @@ public class Manager : MonoBehaviour
     {
         if (SceneType == SceneList.GameScene)
             Game.GameStart();
+        else if (SceneType == SceneList.AppScene)
+            Health.HealthUiSync();
     }
 }
