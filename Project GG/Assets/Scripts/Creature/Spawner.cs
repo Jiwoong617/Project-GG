@@ -28,8 +28,7 @@ public class Spawner : MonoBehaviour
         MonsterController mc = GetClone(monster);
         Instantiate(objectHolder.HoldingObjects[Random.Range(0, objectHolder.HoldingObjects.Count)], mc.transform);
 
-        //юс╫ц
-        mc.Init(pos, new StatInfo(100, 100, 100, 100, 5));
+        mc.Init(pos, new StatInfo(100, 100, 5, 0, 5));
     }
 
     private MonsterController GetClone(GameObject go)
@@ -62,10 +61,14 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnMobs()
     {
+        float spawntime = 3;
+        int count = 0;
         while (player.GetComponent<PlayerController>().isAlive)
         {
             Spawn();
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(spawntime);
+            count++;
+            if(count == 10) { count = 0; spawntime = Mathf.Clamp(spawntime - 0.1f, 0.5f, 3); }
         }
     }
 }

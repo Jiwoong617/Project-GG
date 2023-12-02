@@ -19,11 +19,8 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     void Start()
     {
-        if(pc == null || player == null)
-        {
-            player = Global.Player;
-            pc = player.GetComponent<PlayerController>();
-        }
+        player = Global.Player;
+        pc = player.GetComponent<PlayerController>();
         rad = bg_rect.rect.width * 0.5f;
     }
 
@@ -51,5 +48,12 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         stick_rect.localPosition = Vector3.zero;
         movePos = Vector3.zero;
         pc.SetDir(movePos);
+    }
+
+    public void StartFunc()
+    {
+        player = Global.Player;
+        pc = player.GetComponent<PlayerController>();
+        rad = bg_rect.rect.width* 0.5f;
     }
 }

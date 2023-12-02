@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class Manager : MonoBehaviour
         } 
     }
 
-    private static SceneList SceneType = SceneList.GameScene;
+    [SerializeField] private static SceneList SceneType = SceneList.AppScene;
 
     private void Awake()
     {
@@ -26,14 +27,10 @@ public class Manager : MonoBehaviour
             GameObject go = Instantiate(new GameObject("GameManager"), transform);
             _game = go.AddComponent<GameManager>();
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneChanged;
         }
         else { Destroy(gameObject); return; }
 
-        if (SceneType == SceneList.AppScene) { }
-        else if (SceneType == SceneList.GameScene)
-        {
-            Game.GameStart();
-        }
     }
 
 
@@ -49,4 +46,10 @@ public class Manager : MonoBehaviour
     public static FBManager FBManager { get { return Instance._fb;} }
 
     public void ChangeScene(SceneList type) => SceneType = type;
+
+    private void OnSceneChanged(Scene scene, LoadSceneMode mode)
+    {
+        if (SceneType == SceneList.GameScene)
+            Game.GameStart();
+    }
 }

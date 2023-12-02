@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,7 +33,6 @@ public class GameManager : MonoBehaviour
         // 실행 순서
         //나중에 find with tags로 찾는 것들 다 global로 참조하게 바꿀거임
 
-        // 선택한 스테이지 정보 가져오기
         player = Resources.Load<GameObject>("Prefabs/Game/Player");
         Instantiate(player);
         Instantiate(Resources.Load<GameObject>("Prefabs/Game/Map"));
@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour
         gameoverUI.SetActive(true);
         gameoverUI.GetComponent<TextMeshProUGUI>().color = new(1, 1, 1, 0);
         gameoverUI.GetComponent<TextMeshProUGUI>().DOFade(1, 3);
+
+        Invoke(nameof(ChangeScene), 5);
     }
 
     public IEnumerator StartCount()
@@ -66,5 +68,11 @@ public class GameManager : MonoBehaviour
         text.transform.DOLocalMoveY(500, 0.3f).SetEase(Ease.InQuad).OnComplete(() => text.transform.localPosition = new Vector3(0, 80, 0));
         text.DOColor(new(1, 1, 1, 0), 0.3f);
         text.gameObject.SetActive(false);
+    }
+
+    private void ChangeScene()
+    {
+        Manager.Instance.ChangeScene(SceneList.AppScene);
+        SceneManager.LoadScene("HealthScene");
     }
 }
