@@ -701,7 +701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4645209509528780546, guid: 7c52aeb8158ed5147ba2fd948a92452b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00012207031
+      value: 1.3366699
       objectReference: {fileID: 0}
     - target: {fileID: 4775690480582935680, guid: 7c52aeb8158ed5147ba2fd948a92452b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
