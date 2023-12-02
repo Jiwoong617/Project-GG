@@ -33,17 +33,17 @@ public class HealthUserData
         Id = id;
         Pw = pw;
     }
-    public void arrayEdit(dataVarType _type, int[] _value)
+    public void arrayEdit(DataVarType _type, int[] _value)
     {
         switch (_type)
         {
-            case dataVarType.BodyLevelArray:
+            case DataVarType.BodyLevelArray:
                 BodyLevelArray = _value;
                 break;
-            case dataVarType.BodyExpArray:
+            case DataVarType.BodyExpArray:
                 BodyExpArray = _value;
                 break;
-            case dataVarType.BodyMaxExpArray:
+            case DataVarType.BodyMaxExpArray:
                 BodyMaxExpArray = _value;
                 break;
         }

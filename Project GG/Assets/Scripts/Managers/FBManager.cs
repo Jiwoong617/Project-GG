@@ -22,7 +22,7 @@ public class FBManager : MonoBehaviour
     private string path;
     private DatabaseReference reference;
     private bool checker;
-    IDictionary Idict;
+    public IDictionary Idict;
     public async Task Register(string _id, string _pw)
     {
         checker = false;
@@ -46,18 +46,23 @@ public class FBManager : MonoBehaviour
     public async Task Login(string _id, string _pw)
     {
         Idict = null;
-        await UserDataLoad(dataVarType.Id, _id);
+        await UserDataLoad(DataVarType.Id, _id);
         Debug.Log(Idict);
         if(Idict == null)
         {
             // 회원가입이 되지 않은 Id, 회원가입 알림 띄우기
             return;
         }
-        string inputPw = (string)Idict[dataVarType.Pw.ToString()];
+        string inputPw = (string)Idict[DataVarType.Pw.ToString()];
         Debug.Log(inputPw + ", "+ _pw);
         if(inputPw == _pw)
         {
-            // 비밀번호가 같으면 로그인, 화면 전환
+            // 비밀번호가 같으면 로그인, 화면 전환, uid토큰 값 로컬 저장
+            string uid = (string)Idict[DataVarType.UID.ToString()];
+            // json으로 변환
+            string uidJson = JsonConvert.SerializeObject(uid);
+            // 로컬에 저장
+            File.WriteAllText(path, uidJson);
             Debug.Log("Login success");
         }
         else
@@ -110,10 +115,6 @@ public class FBManager : MonoBehaviour
     public void NewUserDataUpload(string _id, string _pw)
     {
         string uid = Guid.NewGuid().ToString(); // 새로운 uid를 생성
-        //// json으로 변환
-        //string uidJson = JsonConvert.SerializeObject(uid);
-        //// 로컬에 저장
-        //File.WriteAllText(path, uidJson);
 
         string name = null;
         string gender = Gender.Man.ToString();
@@ -121,7 +122,7 @@ public class FBManager : MonoBehaviour
         string json = JsonConvert.SerializeObject(newUserData);
         reference.Child("UserData").Child(newUserData.returnUID()).SetRawJsonValueAsync(json);
     }
-    public async void UserDataEdit(dataVarType _type, string _value, string _uid)
+    public async void UserDataEdit(DataVarType _type, string _value, string _uid)
     {
         Idict = null;
         if (reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -138,28 +139,28 @@ public class FBManager : MonoBehaviour
             }
         });
         // string은 참조형이라 작성함, 문제 있는지 확인 안함
-        string id = (string)Idict[dataVarType.Id.ToString()];
-        string pw = (string)Idict[dataVarType.Pw.ToString()];
-        string name = (string)Idict[dataVarType.Name.ToString()];
-        string gender = (string)Idict[dataVarType.Gender.ToString()];
-        string uid = (string)Idict[dataVarType.UID.ToString()];
+        string id = (string)Idict[DataVarType.Id.ToString()];
+        string pw = (string)Idict[DataVarType.Pw.ToString()];
+        string name = (string)Idict[DataVarType.Name.ToString()];
+        string gender = (string)Idict[DataVarType.Gender.ToString()];
+        string uid = (string)Idict[DataVarType.UID.ToString()];
 
         string targetValue;
         switch(_type)
         {
-            case dataVarType.Id:
+            case DataVarType.Id:
                 targetValue = id;
                 break;
-            case dataVarType.Pw:
+            case DataVarType.Pw:
                 targetValue = pw;
                 break;
-            case dataVarType.Name:
+            case DataVarType.Name:
                 targetValue = name;
                 break;
-            case dataVarType.Gender:
+            case DataVarType.Gender:
                 targetValue = gender;
                 break;
-            case dataVarType.UID:
+            case DataVarType.UID:
                 targetValue = uid;
                 break;
         }
@@ -168,7 +169,7 @@ public class FBManager : MonoBehaviour
         string json = JsonConvert.SerializeObject(targetData);
         await reference.Child("UserData").Child(targetData.returnUID()).SetRawJsonValueAsync(json);
     }
-    public async void UserDataEdit(dataVarType _type, int[] _value, string _uid)
+    public async void UserDataEdit(DataVarType _type, int[] _value, string _uid)
     {
         Idict = null;
         if (reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -185,20 +186,21 @@ public class FBManager : MonoBehaviour
             }
         });
         // string은 참조형이라 작성함, 문제 있는지 확인 안함
-        string id = (string)Idict[dataVarType.Id.ToString()];
-        string pw = (string)Idict[dataVarType.Pw.ToString()];
-        string name = (string)Idict[dataVarType.Name.ToString()];
-        string gender = (string)Idict[dataVarType.Gender.ToString()];
-        string uid = (string)Idict[dataVarType.UID.ToString()];
+        string id = (string)Idict[DataVarType.Id.ToString()];
+        string pw = (string)Idict[DataVarType.Pw.ToString()];
+        string name = (string)Idict[DataVarType.Name.ToString()];
+        string gender = (string)Idict[DataVarType.Gender.ToString()];
+        string uid = (string)Idict[DataVarType.UID.ToString()];
 
         HealthUserData targetData = new HealthUserData(name, gender, uid, id, pw);
         targetData.arrayEdit(_type, _value);
         string json = JsonConvert.SerializeObject(targetData);
         await reference.Child("UserData").Child(targetData.returnUID()).SetRawJsonValueAsync(json);
     }
-    public async Task UserDataLoad(dataVarType _type, string _value)
+    public async Task UserDataLoad(DataVarType _type, string _value)
     {
-        if(_type == dataVarType.UID)
+        Idict = null;
+        if(_type == DataVarType.UID)
         {
             if (_value == null)
             {

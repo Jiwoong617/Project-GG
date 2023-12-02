@@ -31,7 +31,7 @@ public enum Gender
     Woman,
 }
 
-public enum dataVarType
+public enum DataVarType
 {
     Id,
     Pw,
@@ -41,4 +41,13 @@ public enum dataVarType
     BodyLevelArray,
     BodyExpArray,
     BodyMaxExpArray,
+}
+
+public enum MainHealthUi
+{
+    PartsName,
+    CurrentExp,
+    Slash,
+    MaxExp,
+    ExpGauge,
 }
