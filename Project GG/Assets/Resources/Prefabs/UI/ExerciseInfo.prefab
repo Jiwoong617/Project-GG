@@ -241,6 +241,7 @@ MonoBehaviour:
   countText: {fileID: 1433141199392796912}
   startBtn: {fileID: 3189773515835399732}
   addRoutineBtn: {fileID: 3365637922669167939}
+  exStart: {fileID: 6904229390456474439, guid: e60efdc547c560b478fdc9e8b24d887e, type: 3}
 --- !u!1 &6014058641503710394
 GameObject:
   m_ObjectHideFlags: 0

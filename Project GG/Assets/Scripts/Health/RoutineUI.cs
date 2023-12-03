@@ -7,6 +7,7 @@ public class RoutineUI : MonoBehaviour
 {
     public Transform ExList;
     public GameObject ExInfo;
+    public GameObject exStart;
 
     private void OnEnable()
     {
@@ -28,6 +29,8 @@ public class RoutineUI : MonoBehaviour
 
     public void RoutineStart()
     {
-
+        ExStart es = Instantiate(exStart, transform.parent.parent.transform).GetComponent<ExStart>();
+        es.exerciseList = Manager.Health.ExerciseInRoutine();
+        ResetRoutineList();
     }
 }

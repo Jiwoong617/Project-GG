@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,9 +14,10 @@ public class ExerciseInfo : MonoBehaviour
     public TextMeshProUGUI exDescription;
     public Button upBtn, downBtn, exitBtn;
     public TextMeshProUGUI countText;
-    public Button startBtn, addRoutineBtn; 
+    public Button startBtn, addRoutineBtn;
+    public GameObject exStart;
 
-    private int count = 10;
+    private int count;
 
     private void Start()
     {
@@ -30,6 +32,8 @@ public class ExerciseInfo : MonoBehaviour
         exitBtn.onClick.AddListener(() => Destroy(gameObject));
         startBtn.onClick.AddListener(StartBtn);
         addRoutineBtn.onClick.AddListener(AddRoutineBtn);
+
+        count = 10;
     }
 
     private void OnClickedUpBtn()
@@ -45,7 +49,11 @@ public class ExerciseInfo : MonoBehaviour
     
     private void StartBtn()
     {
-
+        ExStart es = Instantiate(exStart, transform.parent.parent.transform).GetComponent<ExStart>();
+        if (es.exerciseList == null)
+            es.exerciseList = new();
+        es.exerciseList.Add(new Exercise(ex.title, ex.part, count, ex.exp, ex.img, ex.description));
+        Destroy(gameObject);
     }
 
     private void AddRoutineBtn()
