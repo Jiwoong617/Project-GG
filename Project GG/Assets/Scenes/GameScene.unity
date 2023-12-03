@@ -327,6 +327,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1574819658}
     m_Modifications:
+    - target: {fileID: 2292974678786285063, guid: e1c387dbd2f84d248ba4cef947c2f87d, type: 3}
+      propertyPath: m_text
+      value: "Game Over\n\uC0DD\uC874 \uC2DC\uAC04 : 1238\uCD08"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292974678786285063, guid: e1c387dbd2f84d248ba4cef947c2f87d, type: 3}
+      propertyPath: m_fontSize
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292974678786285063, guid: e1c387dbd2f84d248ba4cef947c2f87d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 557301cd266fd414daba70104f106fcd, type: 2}
+    - target: {fileID: 2292974678786285063, guid: e1c387dbd2f84d248ba4cef947c2f87d, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292974678786285063, guid: e1c387dbd2f84d248ba4cef947c2f87d, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292974678786285063, guid: e1c387dbd2f84d248ba4cef947c2f87d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7352606053498909550, guid: 557301cd266fd414daba70104f106fcd, type: 2}
+    - target: {fileID: 2292974678786285063, guid: e1c387dbd2f84d248ba4cef947c2f87d, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3800788690158683514, guid: e1c387dbd2f84d248ba4cef947c2f87d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

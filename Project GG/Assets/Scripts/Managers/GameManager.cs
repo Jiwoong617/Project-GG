@@ -28,6 +28,19 @@ public class GameManager : MonoBehaviour
     //    GameStart();
     //}
 
+
+    Coroutine co = null;
+    float time = 0;
+
+    IEnumerator AliveTime()
+    {
+        while(true)
+        {
+            yield return null;
+            time += Time.deltaTime;
+        }
+    }
+
     public void GameStart()
     {
         // 실행 순서
@@ -40,13 +53,18 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartCount());
 
         Instantiate(Resources.Load<GameObject>("Prefabs/Game/Spawner"));
+        time = 0;
+        co = StartCoroutine(AliveTime());
     }
 
     public void GameOver()
     {
         GameObject gameoverUI = GameObject.Find("Canvas").transform.GetChild(2).gameObject;
         gameoverUI.SetActive(true);
+        StopCoroutine(co);
+        co = null;
         gameoverUI.GetComponent<TextMeshProUGUI>().color = new(1, 1, 1, 0);
+        gameoverUI.GetComponent<TextMeshProUGUI>().text = $"Game Over\n생존시간: {time :0.00}초";
         gameoverUI.GetComponent<TextMeshProUGUI>().DOFade(1, 3);
 
         Invoke(nameof(ChangeScene), 5);

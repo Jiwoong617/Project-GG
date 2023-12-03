@@ -1752,6 +1752,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6143486925789116483}
     m_Modifications:
+    - target: {fileID: 225637341465511104, guid: 8d732391104c6d34a95de389e4fedea0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 225637341465511104, guid: 8d732391104c6d34a95de389e4fedea0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 225637341465511104, guid: 8d732391104c6d34a95de389e4fedea0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 4737450569075281599}
+    - target: {fileID: 225637341465511104, guid: 8d732391104c6d34a95de389e4fedea0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 225637341465511104, guid: 8d732391104c6d34a95de389e4fedea0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 225637341465511104, guid: 8d732391104c6d34a95de389e4fedea0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 225637341465511104, guid: 8d732391104c6d34a95de389e4fedea0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1802856132073090322, guid: 8d732391104c6d34a95de389e4fedea0, type: 3}
       propertyPath: m_Name
       value: Exit
@@ -2930,7 +2958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3604210508801094406, guid: f770983430ea0bf49a65b907507b8974, type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 1.0000343
       objectReference: {fileID: 0}
     - target: {fileID: 3764069728610534117, guid: f770983430ea0bf49a65b907507b8974, type: 3}
       propertyPath: m_sharedMaterial
@@ -3014,7 +3042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4180397538358285330, guid: f770983430ea0bf49a65b907507b8974, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.00012207031
       objectReference: {fileID: 0}
     - target: {fileID: 4257283417445199204, guid: f770983430ea0bf49a65b907507b8974, type: 3}
       propertyPath: m_AnchorMax.y
