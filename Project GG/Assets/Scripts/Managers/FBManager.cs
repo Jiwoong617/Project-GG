@@ -19,19 +19,17 @@ using Newtonsoft.Json.Linq;
 
 public class FBManager : MonoBehaviour
 {
-    private string path;
+    public string path;
     private DatabaseReference reference;
-    private bool checker;
     public async Task Register(string _id, string _pw)
     {
-        checker = false;
         if(CheckValidId(_id) == false)
         {
             // 유효하지 않은 아이디라고 알림, 기능 종료
             Debug.LogError("invalid id");
             return;
         }
-        await IsSameId(_id);
+        bool checker = await IsSameId(_id);
         if (checker)
         {
             //같은 아이디가 있다고 알림, 기능 종료
@@ -44,21 +42,20 @@ public class FBManager : MonoBehaviour
     }
     public async Task Login(string _id, string _pw)
     {
-        IDictionary Idict = Manager.Idict;
-        Idict = null;
-        await UserDataLoad(DataVarType.Id, _id);
-        Debug.Log(Idict);
-        if(Idict == null)
+        IDictionary r_idict = null;
+        r_idict = await UserDataLoad(DataVarType.Id, _id);
+        Debug.Log(r_idict);
+        if(r_idict == null)
         {
             // 회원가입이 되지 않은 Id, 회원가입 알림 띄우기
             return;
         }
-        string inputPw = (string)Idict[DataVarType.Pw.ToString()];
+        string inputPw = (string)r_idict[DataVarType.Pw.ToString()];
         Debug.Log(inputPw + ", "+ _pw);
         if(inputPw == _pw)
         {
             // 비밀번호가 같으면 로그인, 화면 전환, uid토큰 값 로컬 저장
-            string uid = (string)Idict[DataVarType.UID.ToString()];
+            string uid = (string)r_idict[DataVarType.UID.ToString()];
             // json으로 변환
             string uidJson = JsonConvert.SerializeObject(uid);
             // 로컬에 저장
@@ -93,8 +90,9 @@ public class FBManager : MonoBehaviour
         }
         return true;
     }
-    public async Task IsSameId(string _id)
+    public async Task<bool> IsSameId(string _id)
     {
+        bool r_checker = false;
         IDictionary searchData = null;
         if (reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference; // 왜 레퍼런스가 null로 뜨지?
         await reference.Child("UserData").GetValueAsync().ContinueWith(task =>
@@ -106,11 +104,11 @@ public class FBManager : MonoBehaviour
                 {
                     searchData = (IDictionary)data.Value;
                     string targetId = (string)searchData["Id"];
-                    if (targetId == _id) checker = true;
+                    if (targetId == _id) r_checker = true;
                 }
             }
         });
-        return;
+        return r_checker;
     }
     public void NewUserDataUpload(string _id, string _pw)
     {
@@ -124,8 +122,7 @@ public class FBManager : MonoBehaviour
     }
     public async void UserDataEdit(DataVarType _type, string _value, string _uid)
     {
-        IDictionary Idict = Manager.Idict;
-        Idict = null;
+        IDictionary r_idict = null;
         if (reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference;
         await reference.Child("UserData").GetValueAsync().ContinueWith(task =>
         {
@@ -135,16 +132,16 @@ public class FBManager : MonoBehaviour
                 foreach (DataSnapshot data in snapshot.Children)
                 {
                     if(data.Key == _uid)
-                        Idict = (IDictionary)data.Value;
+                        r_idict = (IDictionary)data.Value;
                 }
             }
         });
         // string은 참조형이라 작성함, 문제 있는지 확인 안함
-        string id = (string)Idict[DataVarType.Id.ToString()];
-        string pw = (string)Idict[DataVarType.Pw.ToString()];
-        string name = (string)Idict[DataVarType.Name.ToString()];
-        string gender = (string)Idict[DataVarType.Gender.ToString()];
-        string uid = (string)Idict[DataVarType.UID.ToString()];
+        string id = (string)r_idict[DataVarType.Id.ToString()];
+        string pw = (string)r_idict[DataVarType.Pw.ToString()];
+        string name = (string)r_idict[DataVarType.Name.ToString()];
+        string gender = (string)r_idict[DataVarType.Gender.ToString()];
+        string uid = (string)r_idict[DataVarType.UID.ToString()];
 
         string targetValue;
         switch(_type)
@@ -172,8 +169,7 @@ public class FBManager : MonoBehaviour
     }
     public async void UserDataEdit(DataVarType _type, int[] _value, string _uid)
     {
-        IDictionary Idict = Manager.Idict;
-        Idict = null;
+        IDictionary r_idict = null;
         if (reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference;
         await reference.Child("UserData").GetValueAsync().ContinueWith(task =>
         {
@@ -183,32 +179,32 @@ public class FBManager : MonoBehaviour
                 foreach (DataSnapshot data in snapshot.Children)
                 {
                     if (data.Key == _uid)
-                        Idict = (IDictionary)data.Value;
+                        r_idict = (IDictionary)data.Value;
                 }
             }
         });
+        if (r_idict == null) Debug.LogError("data search failed");
         // string은 참조형이라 작성함, 문제 있는지 확인 안함
-        string id = (string)Idict[DataVarType.Id.ToString()];
-        string pw = (string)Idict[DataVarType.Pw.ToString()];
-        string name = (string)Idict[DataVarType.Name.ToString()];
-        string gender = (string)Idict[DataVarType.Gender.ToString()];
-        string uid = (string)Idict[DataVarType.UID.ToString()];
+        string id = (string)r_idict[DataVarType.Id.ToString()];
+        string pw = (string)r_idict[DataVarType.Pw.ToString()];
+        string name = (string)r_idict[DataVarType.Name.ToString()];
+        string gender = (string)r_idict[DataVarType.Gender.ToString()];
+        string uid = (string)r_idict[DataVarType.UID.ToString()];
 
         HealthUserData targetData = new HealthUserData(name, gender, uid, id, pw);
         targetData.arrayEdit(_type, _value);
         string json = JsonConvert.SerializeObject(targetData);
         await reference.Child("UserData").Child(targetData.returnUID()).SetRawJsonValueAsync(json);
     }
-    public async Task UserDataLoad(DataVarType _type, string _value)
+    public async Task<IDictionary> UserDataLoad(DataVarType _type, string _value)
     {
-        IDictionary Idict = Manager.Idict;
-        Idict = null;
+        IDictionary r_idict = null;
         if(_type == DataVarType.UID)
         {
             if (_value == null)
             {
                 Debug.LogError("UID is null");
-                return;
+                return null;
             }
         }
         if(reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -221,12 +217,11 @@ public class FBManager : MonoBehaviour
                 {
                     IDictionary targetData = (IDictionary)data.Value;
                     string targetValue = (string)targetData[_type.ToString()];
-                    if (targetValue == _value) Idict = targetData;
+                    if (targetValue == _value) r_idict = targetData;
                 }
             }
         });
-        Debug.Log(Idict);
-        return;
+        return r_idict;
     }
     private void Awake()
     {

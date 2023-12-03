@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainUi : MonoBehaviour
 {
-    void Update()
+    void FixedUpdate()
     {
         Manager.Health.HealthUiSync();
     }

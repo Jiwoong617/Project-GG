@@ -19,7 +19,6 @@ public class Manager : MonoBehaviour
     }
 
     [SerializeField] private static SceneList SceneType = SceneList.AppScene;
-    public static IDictionary Idict;
 
     private void Awake()
     {
@@ -34,6 +33,7 @@ public class Manager : MonoBehaviour
             Data.dataPath = Path.Combine(Application.dataPath, "Resources/RoutineData.json");
             Health.path = Path.Combine(Application.dataPath, "uid.json");
             Health.routines = new();
+            FB.path = Path.Combine(Application.dataPath, "uid.json");
             //Health.routines = Data.RoutineDeserialize();
         }
         else { Destroy(gameObject); return; }
@@ -49,7 +49,7 @@ public class Manager : MonoBehaviour
     public static GameManager Game { get { return Instance._game; } }
     public static HealthManager Health { get { return Instance._health; } }
     public static DataManager Data { get {  return Instance._data; } }
-    public static FBManager FBManager { get { return Instance._fb;} }
+    public static FBManager FB { get { return Instance._fb;} }
 
     public void ChangeScene(SceneList type) => SceneType = type;
 

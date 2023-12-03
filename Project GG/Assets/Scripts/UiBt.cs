@@ -34,7 +34,7 @@ public class UiBt : MonoBehaviour
         TMP_InputField idField = registerCanvas.Find("SignInFrame/IdInput").GetComponent<TMP_InputField>();
         TMP_InputField pwField = registerCanvas.Find("SignInFrame/PwInput").GetComponent<TMP_InputField>();
 
-        await Manager.FBManager.Login(idField.text, pwField.text);
+        await Manager.FB.Login(idField.text, pwField.text);
     }
     public async void RegisterBt()
     {
@@ -42,7 +42,7 @@ public class UiBt : MonoBehaviour
         TMP_InputField idField = registerCanvas.Find("SignInFrame/IdInput").GetComponent<TMP_InputField>();
         TMP_InputField pwField = registerCanvas.Find("SignInFrame/PwInput").GetComponent<TMP_InputField>();
 
-        await Manager.FBManager.Register(idField.text, pwField.text);
+        await Manager.FB.Register(idField.text, pwField.text);
     }
     private void Awake()
     {

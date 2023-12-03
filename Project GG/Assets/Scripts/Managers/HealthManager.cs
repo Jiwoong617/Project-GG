@@ -42,9 +42,9 @@ public class HealthManager : MonoBehaviour
                 Debug.LogError("uid is null");
                 return;
             }
-            await Manager.FBManager.UserDataLoad(DataVarType.UID, uid);
-            IDictionary data = Manager.Idict;
+            IDictionary data = await Manager.FB.UserDataLoad(DataVarType.UID, uid);
 
+            Debug.Log(data);
             int[] bodyLevelArray = (int[])data[DataVarType.BodyLevelArray.ToString()];
             int[] bodyExpArray = (int[])data[DataVarType.BodyExpArray.ToString()];
             int[] bodyMaxExpArray = (int[])data[DataVarType.BodyMaxExpArray.ToString()];
