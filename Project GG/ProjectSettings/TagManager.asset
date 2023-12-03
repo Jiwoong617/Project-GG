@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Monster
   - UserDataUI
+  - main
   layers:
   - Default
   - TransparentFX

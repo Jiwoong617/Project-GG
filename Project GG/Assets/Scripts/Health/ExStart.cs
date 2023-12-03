@@ -108,6 +108,7 @@ public class ExStart : MonoBehaviour
             Manager.Health.myHealthData.BodyLevelArray[targetIndex] += 1;
         }
         Manager.FB.UserDataEdit(Manager.Health.myHealthData);
+        Manager.Health.UpdateUi();
     }
 
     public void ExitBtn()

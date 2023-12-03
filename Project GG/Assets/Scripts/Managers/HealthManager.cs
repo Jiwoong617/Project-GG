@@ -16,6 +16,7 @@ public class HealthManager : MonoBehaviour
 {
     public List<RoutineStruct> routines;
     public HealthUserData myHealthData;
+    public GameObject main;
 
     public List<Exercise> ExerciseInRoutine()
     {
@@ -71,6 +72,11 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     public void UpdateUi()
     {
+        bool isFlag = false;
+        if (main == null)
+            main = GameObject.FindWithTag("main");
+        if (main.activeSelf == false) isFlag = true;
+        main.SetActive(true);
         List<GameObject> healthUis = SearchHealthUi();
         int cnt = 0;
         foreach (GameObject go in healthUis)
@@ -86,5 +92,7 @@ public class HealthManager : MonoBehaviour
             expGauge.value = (float)myHealthData.BodyExpArray[cnt] / myHealthData.BodyMaxExpArray[cnt];
             cnt++;
         }
+        if(isFlag == true)
+            main.SetActive(false);
     }
 }
