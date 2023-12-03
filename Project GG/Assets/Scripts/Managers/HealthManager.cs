@@ -51,6 +51,7 @@ public class HealthManager : MonoBehaviour
             }
             HealthUserData userData = await Manager.FB.UserHealthDataLoad(DataVarType.UID, uid);
             myHealthData = userData.DeepCopy();
+            UpdateUi();
         }
     }
     /// <summary>
