@@ -25,4 +25,9 @@ public class RoutineUI : MonoBehaviour
             Destroy(t.gameObject);
         gameObject.SetActive(false);
     }
+
+    public void RoutineStart()
+    {
+
+    }
 }

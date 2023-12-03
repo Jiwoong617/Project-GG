@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class PlayerStat : Stat
 {
-    PlayerBody bodyInfo;
-
-
-    public void SetStat()
+    public override void SetStat(StatInfo status)
     {
-        int hp = 0; //부위에 따른 값 수정
-        int atk = 0;
-        int dfc = 0;
-        float speed = 0;
-        //base.SetStat(hp, atk, dfc, speed);
+        //레벨별 뒤에 더해주기
+        Hp = status.hp;
+        MaxHp = status.maxHp;
+        Attack = status.attack;
+        Defence = status.defence;
+        MoveSpeed = status.moveSpeed;
     }
 
     //몸 레벨 관련 함수 정의 ex) 팔 레벨 5 이상 -> 사거리 증가 or 자연 회복 코루틴 등등
