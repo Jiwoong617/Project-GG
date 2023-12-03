@@ -71,7 +71,6 @@ public class HealthManager : MonoBehaviour
     public void UpdateUi()
     {
         List<GameObject> healthUis = SearchHealthUi();
-
         int cnt = 0;
         foreach (GameObject go in healthUis)
         {
