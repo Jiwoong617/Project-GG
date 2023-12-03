@@ -59,6 +59,7 @@ public class DataManager : MonoBehaviour
         else
         {
             //파일이 존재하지 않은 경우, 처음 생성시
+
             Debug.LogError(dataPath + " 해당 파일이 존재하지 않습니다.");
         }
         return routineList;

@@ -46,7 +46,7 @@ public class ExStart : MonoBehaviour
                 yield return null;
             }
 
-            GainExp();
+            GainExp(count);
 
             if (count+1 == exerciseList.Count)
             {
@@ -79,9 +79,35 @@ public class ExStart : MonoBehaviour
             ExitBtn();
     }
 
-    public void GainExp()
+    public void GainExp(int n)
     {
-
+        int getExp = exerciseList[n].exp * exerciseList[n].times;
+        int targetIndex = int.MaxValue;
+        switch(exerciseList[n].part)
+        {
+            case BodyParts.Abs:
+                targetIndex = 0;
+                break;
+            case BodyParts.Arm:
+                targetIndex = 1;
+                break;
+            case BodyParts.Back:
+                targetIndex = 2;
+                break;
+            case BodyParts.Chest:
+                targetIndex = 3;
+                break;
+            case BodyParts.Leg:
+                targetIndex = 4;
+                break;
+        }
+        Manager.Health.myHealthData.BodyExpArray[targetIndex] += getExp;
+        while(Manager.Health.myHealthData.BodyExpArray[targetIndex] >= Manager.Health.myHealthData.BodyMaxExpArray[targetIndex])
+        {
+            Manager.Health.myHealthData.BodyExpArray[targetIndex] -= Manager.Health.myHealthData.BodyMaxExpArray[targetIndex];
+            Manager.Health.myHealthData.BodyLevelArray[targetIndex] += 1;
+        }
+        Manager.FB.UserDataEdit(Manager.Health.myHealthData);
     }
 
     public void ExitBtn()

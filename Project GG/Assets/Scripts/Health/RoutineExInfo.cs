@@ -28,6 +28,7 @@ public class RoutineExInfo : MonoBehaviour
         }
 
         Manager.Health.routines.RemoveAt(idx);
+        Manager.Data.RoutineSerialize(Manager.Health.routines);
         Destroy(gameObject);
     }
 }

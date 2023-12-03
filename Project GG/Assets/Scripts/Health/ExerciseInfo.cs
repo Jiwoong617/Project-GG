@@ -60,5 +60,6 @@ public class ExerciseInfo : MonoBehaviour
     {
         RoutineStruct routineStruct = new RoutineStruct(ex.name, count);
         Manager.Health.routines.Add(routineStruct);
+        Manager.Data.RoutineSerialize(Manager.Health.routines);
     }
 }

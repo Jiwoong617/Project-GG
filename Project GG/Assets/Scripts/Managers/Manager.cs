@@ -31,9 +31,10 @@ public class Manager : MonoBehaviour
 
             SceneManager.sceneLoaded += OnSceneChanged;
             Data.dataPath = Path.Combine(Application.dataPath, "Resources/RoutineData.json");
-            Health.routines = new();
             Health.HealthDataSync();
-            //Health.routines = Data.RoutineDeserialize();
+            Health.routines = Data.RoutineDeserialize();
+            if(Health.routines == null)
+                Health.routines = new();
         }
         else { Destroy(gameObject); return; }
     }
