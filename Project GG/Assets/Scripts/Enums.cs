@@ -46,6 +46,7 @@ public enum DataVarType
 public enum MainHealthUi
 {
     PartsName,
+    PartsLv,
     CurrentExp,
     Slash,
     MaxExp,

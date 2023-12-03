@@ -19,6 +19,7 @@ public class Manager : MonoBehaviour
     }
 
     [SerializeField] private static SceneList SceneType = SceneList.AppScene;
+    public static IDictionary Idict;
 
     private void Awake()
     {

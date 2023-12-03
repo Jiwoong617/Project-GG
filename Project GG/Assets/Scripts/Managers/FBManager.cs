@@ -22,7 +22,6 @@ public class FBManager : MonoBehaviour
     private string path;
     private DatabaseReference reference;
     private bool checker;
-    public IDictionary Idict;
     public async Task Register(string _id, string _pw)
     {
         checker = false;
@@ -45,6 +44,7 @@ public class FBManager : MonoBehaviour
     }
     public async Task Login(string _id, string _pw)
     {
+        IDictionary Idict = Manager.Idict;
         Idict = null;
         await UserDataLoad(DataVarType.Id, _id);
         Debug.Log(Idict);
@@ -124,6 +124,7 @@ public class FBManager : MonoBehaviour
     }
     public async void UserDataEdit(DataVarType _type, string _value, string _uid)
     {
+        IDictionary Idict = Manager.Idict;
         Idict = null;
         if (reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference;
         await reference.Child("UserData").GetValueAsync().ContinueWith(task =>
@@ -171,6 +172,7 @@ public class FBManager : MonoBehaviour
     }
     public async void UserDataEdit(DataVarType _type, int[] _value, string _uid)
     {
+        IDictionary Idict = Manager.Idict;
         Idict = null;
         if (reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference;
         await reference.Child("UserData").GetValueAsync().ContinueWith(task =>
@@ -199,6 +201,7 @@ public class FBManager : MonoBehaviour
     }
     public async Task UserDataLoad(DataVarType _type, string _value)
     {
+        IDictionary Idict = Manager.Idict;
         Idict = null;
         if(_type == DataVarType.UID)
         {

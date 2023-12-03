@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
@@ -28,18 +30,20 @@ public class HealthManager : MonoBehaviour
     }
     public async void HealthUiSync()
     {
-        string nowScene = SceneManager.GetActiveScene().ToString();
+        path = Path.Combine(Application.dataPath, "uid.json");
+        string nowScene = SceneManager.GetActiveScene().name.ToString() + "Scene";
         string targetScene = SceneList.AppScene.ToString();
         if (nowScene == targetScene)
         {
-            string uid = File.ReadAllText(path);
-            if(uid == null)
+            string uid = "684714fc-e251-4fb6-8e2e-7ebc98e74060";
+            //string uid = File.ReadAllText(path);
+            if (uid == null)
             {
                 Debug.LogError("uid is null");
                 return;
             }
             await Manager.FBManager.UserDataLoad(DataVarType.UID, uid);
-            IDictionary data = Manager.FBManager.Idict;
+            IDictionary data = Manager.Idict;
 
             int[] bodyLevelArray = (int[])data[DataVarType.BodyLevelArray.ToString()];
             int[] bodyExpArray = (int[])data[DataVarType.BodyExpArray.ToString()];
@@ -53,6 +57,20 @@ public class HealthManager : MonoBehaviour
             healthUis.Add(GameObject.Find(uiPath + "ChestLv"));
             healthUis.Add(GameObject.Find(uiPath + "LegLv"));
 
+            int cnt = 0;
+            foreach (GameObject go in healthUis)
+            {
+                TMP_Text partsLv = go.transform.Find(MainHealthUi.PartsLv.ToString()).GetComponent<TMP_Text>();
+                TMP_Text curExp = go.transform.Find(MainHealthUi.CurrentExp.ToString()).GetComponent<TMP_Text>();
+                TMP_Text maxExp = go.transform.Find(MainHealthUi.MaxExp.ToString()).GetComponent<TMP_Text>();
+                Slider expGauge = go.transform.Find(MainHealthUi.ExpGauge.ToString()).GetComponent<Slider>();
+
+                partsLv.text = "Lv" + bodyLevelArray[cnt];
+                curExp.text = bodyExpArray[cnt].ToString();
+                maxExp.text = bodyMaxExpArray[cnt].ToString();
+                expGauge.value = bodyExpArray[cnt] / bodyMaxExpArray[cnt];
+                cnt++;
+            }
         }
     }
 }
