@@ -56,7 +56,7 @@ public class ExStart : MonoBehaviour
                 break;
             }
 
-            totaltime = 3f;
+            totaltime = 30f;
             currentEx.text = "30ÃÊ ÈÞ½Ä";
             while (totaltime > 0)
             {

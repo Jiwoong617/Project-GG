@@ -38,12 +38,12 @@ public class ExerciseInfo : MonoBehaviour
 
     private void OnClickedUpBtn()
     {
-        count = Mathf.Clamp(count+1, 0, 50);
+        count = Mathf.Clamp(count+1, 1, 100);
         countText.text = count.ToString();
     }
     private void OnClickedDownBtn()
     {
-        count = Mathf.Clamp(count-1, 0, 50);
+        count = Mathf.Clamp(count-1, 1, 100);
         countText.text = count.ToString();
     }
     
