@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 
 public class HealthUserData
 {
@@ -32,6 +33,15 @@ public class HealthUserData
         UID = _uid;
         Id = id;
         Pw = pw;
+    }
+    public HealthUserData DeepCopy()
+    {
+        HealthUserData newData = new HealthUserData(Name, Gender, UID, Id, Pw);
+        newData.BodyLevelArray = BodyLevelArray;
+        newData.BodyExpArray = BodyExpArray;
+        newData.BodyMaxExpArray = BodyMaxExpArray;
+
+        return newData;
     }
     public void arrayEdit(DataVarType _type, int[] _value)
     {

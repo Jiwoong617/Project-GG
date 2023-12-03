@@ -16,10 +16,10 @@ using UnityEditor;
 using UnityEngine.Analytics;
 using UnityEngine.EventSystems;
 using Newtonsoft.Json.Linq;
+using UnityEngine.SceneManagement;
 
 public class FBManager : MonoBehaviour
 {
-    public string path;
     private DatabaseReference reference;
     public async Task Register(string _id, string _pw)
     {
@@ -51,7 +51,6 @@ public class FBManager : MonoBehaviour
             return;
         }
         string inputPw = (string)r_idict[DataVarType.Pw.ToString()];
-        Debug.Log(inputPw + ", "+ _pw);
         if(inputPw == _pw)
         {
             // 비밀번호가 같으면 로그인, 화면 전환, uid토큰 값 로컬 저장
@@ -59,12 +58,15 @@ public class FBManager : MonoBehaviour
             // json으로 변환
             string uidJson = JsonConvert.SerializeObject(uid);
             // 로컬에 저장
-            File.WriteAllText(path, uidJson);
+            File.WriteAllText(Manager.Instance.UidPath, uidJson);
             Debug.Log("Login success");
+            Manager.Instance.ChangeScene(SceneList.AppScene);
+            SceneManager.LoadScene("App");
         }
         else
         {
             // 다르다면 오류 메세지
+            Debug.LogError("Password is not correct");
             return;
         }
     }
@@ -195,6 +197,11 @@ public class FBManager : MonoBehaviour
         targetData.arrayEdit(_type, _value);
         string json = JsonConvert.SerializeObject(targetData);
         await reference.Child("UserData").Child(targetData.returnUID()).SetRawJsonValueAsync(json);
+    }
+    public async void UserDataEdit(HealthUserData _userData)
+    {
+        string json = JsonConvert.SerializeObject(_userData);
+        await reference.Child("UserData").Child(_userData.returnUID()).SetRawJsonValueAsync(json);
     }
     public async Task<IDictionary> UserDataLoad(DataVarType _type, string _value)
     {

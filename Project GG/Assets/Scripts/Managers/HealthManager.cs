@@ -10,11 +10,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Newtonsoft.Json;
 using Firebase.Database;
+using System.Threading.Tasks;
 
 public class HealthManager : MonoBehaviour
 {
-    public string path;
     public List<RoutineStruct> routines;
+    public HealthUserData myHealthData;
 
     public List<Exercise> ExerciseInRoutine()
     {
@@ -32,44 +33,58 @@ public class HealthManager : MonoBehaviour
         }
         return exercises;
     }
-    public async void HealthUiSync()
+    /// <summary>
+    /// FB에서 데이터 가져오는 코드
+    /// </summary>
+    public async void HealthDataSync()
     {
-        path = Path.Combine(Application.dataPath, "uid.json");
         string nowScene = SceneManager.GetActiveScene().name.ToString() + "Scene";
         string targetScene = SceneList.AppScene.ToString();
         if (nowScene == targetScene)
         {
-            string uid = "d609dcd1-1564-467a-bbb9-587ad252ee5b";
-            //string uid = File.ReadAllText(path);
+            string uidJson = File.ReadAllText(Manager.Instance.UidPath);
+            string uid = JsonConvert.DeserializeObject<string>(uidJson);
             if (uid == null)
             {
                 Debug.LogError("uid is null");
                 return;
             }
             HealthUserData userData = await Manager.FB.UserHealthDataLoad(DataVarType.UID, uid);
+            myHealthData = userData.DeepCopy();
+        }
+    }
+    /// <summary>
+    /// healthUi들 가져오는 코드
+    /// </summary>
+    /// <returns></returns>
+    public List<GameObject> SearchHealthUi()
+    {
+        List<GameObject> healthUis = new List<GameObject>();
+        healthUis = GameObject.FindGameObjectsWithTag("UserDataUI").ToList();
+        healthUis.Reverse();
 
-            List<GameObject> healthUis = new List<GameObject>();
-            string uiPath = "UiCanvas/Main/Scroll View/Viewport/Content/";
-            healthUis.Add(GameObject.Find(uiPath + "AbsLv"));
-            healthUis.Add(GameObject.Find(uiPath + "ArmLv"));
-            healthUis.Add(GameObject.Find(uiPath + "BackLv"));
-            healthUis.Add(GameObject.Find(uiPath + "ChestLv"));
-            healthUis.Add(GameObject.Find(uiPath + "LegLv"));
+        return healthUis; ;
+    }
+    /// <summary>
+    /// Ui 업데이트 해주는 코드
+    /// </summary>
+    public void UpdateUi()
+    {
+        List<GameObject> healthUis = SearchHealthUi();
 
-            int cnt = 0;
-            foreach (GameObject go in healthUis)
-            {
-                TMP_Text partsLv = go.transform.Find(MainHealthUi.PartsLv.ToString()).GetComponent<TMP_Text>();
-                TMP_Text curExp = go.transform.Find(MainHealthUi.CurrentExp.ToString()).GetComponent<TMP_Text>();
-                TMP_Text maxExp = go.transform.Find(MainHealthUi.MaxExp.ToString()).GetComponent<TMP_Text>();
-                Slider expGauge = go.transform.Find(MainHealthUi.ExpGauge.ToString()).GetComponent<Slider>();
+        int cnt = 0;
+        foreach (GameObject go in healthUis)
+        {
+            TMP_Text partsLv = go.transform.Find(MainHealthUi.PartsLv.ToString()).GetComponent<TMP_Text>();
+            TMP_Text curExp = go.transform.Find(MainHealthUi.CurrentExp.ToString()).GetComponent<TMP_Text>();
+            TMP_Text maxExp = go.transform.Find(MainHealthUi.MaxExp.ToString()).GetComponent<TMP_Text>();
+            Slider expGauge = go.transform.Find(MainHealthUi.ExpGauge.ToString()).GetComponent<Slider>();
 
-                partsLv.text = "Lv" + userData.BodyLevelArray[cnt];
-                curExp.text = userData.BodyExpArray[cnt].ToString();
-                maxExp.text = userData.BodyMaxExpArray[cnt].ToString();
-                expGauge.value = userData.BodyExpArray[cnt] / userData.BodyMaxExpArray[cnt];
-                cnt++;
-            }
+            partsLv.text = "Lv" + myHealthData.BodyLevelArray[cnt];
+            curExp.text = myHealthData.BodyExpArray[cnt].ToString();
+            maxExp.text = myHealthData.BodyMaxExpArray[cnt].ToString();
+            expGauge.value = (float)myHealthData.BodyExpArray[cnt] / myHealthData.BodyMaxExpArray[cnt];
+            cnt++;
         }
     }
 }

@@ -31,9 +31,7 @@ public class Manager : MonoBehaviour
 
             SceneManager.sceneLoaded += OnSceneChanged;
             Data.dataPath = Path.Combine(Application.dataPath, "Resources/RoutineData.json");
-            Health.path = Path.Combine(Application.dataPath, "uid.json");
             Health.routines = new();
-            FB.path = Path.Combine(Application.dataPath, "uid.json");
             //Health.routines = Data.RoutineDeserialize();
         }
         else { Destroy(gameObject); return; }
@@ -50,6 +48,9 @@ public class Manager : MonoBehaviour
     public static HealthManager Health { get { return Instance._health; } }
     public static DataManager Data { get {  return Instance._data; } }
     public static FBManager FB { get { return Instance._fb;} }
+    
+    // ±×³É ¾ê°¡ Path°ª µé°í ÀÖ´Â°Ô ´õ ±ò²ûÇÒµí?
+    public string UidPath = Path.Combine(Application.dataPath, "uid.json");
 
     public void ChangeScene(SceneList type) => SceneType = type;
 
@@ -58,6 +59,6 @@ public class Manager : MonoBehaviour
         if (SceneType == SceneList.GameScene)
             Game.GameStart();
         else if (SceneType == SceneList.AppScene)
-            Health.HealthUiSync();
+            Health.HealthDataSync();
     }
 }

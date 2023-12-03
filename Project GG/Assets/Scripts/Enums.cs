@@ -16,6 +16,7 @@ public enum SceneList
     Init, // 초기 Manager들이 Scene에 돌아갈때마다 생기지 않게 하는 초기 Scene
     AppScene,
     GameScene,
+    RegisterScene,
 }
 public enum BodyParts
 {
