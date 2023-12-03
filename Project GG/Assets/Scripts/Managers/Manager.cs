@@ -61,6 +61,9 @@ public class Manager : MonoBehaviour
         if (SceneType == SceneList.GameScene)
             Game.GameStart();
         else if (SceneType == SceneList.AppScene)
+        {
             Health.HealthDataSync();
+            Health.SearchHealthUi();
+        }
     }
 }

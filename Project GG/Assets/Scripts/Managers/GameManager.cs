@@ -91,6 +91,6 @@ public class GameManager : MonoBehaviour
     private void ChangeScene()
     {
         Manager.Instance.ChangeScene(SceneList.AppScene);
-        SceneManager.LoadScene("HealthScene");
+        SceneManager.LoadScene("App");
     }
 }

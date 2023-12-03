@@ -17,6 +17,7 @@ public class HealthManager : MonoBehaviour
     public List<RoutineStruct> routines;
     public HealthUserData myHealthData;
     public GameObject main;
+    List<GameObject> healthUis;
 
     public List<Exercise> ExerciseInRoutine()
     {
@@ -61,23 +62,23 @@ public class HealthManager : MonoBehaviour
     /// <returns></returns>
     public List<GameObject> SearchHealthUi()
     {
-        List<GameObject> healthUis = new List<GameObject>();
         healthUis = GameObject.FindGameObjectsWithTag("UserDataUI").ToList();
         healthUis.Reverse();
 
-        return healthUis; ;
+        return healthUis;
     }
     /// <summary>
     /// Ui 업데이트 해주는 코드
     /// </summary>
     public void UpdateUi()
     {
+        if (healthUis == null) SearchHealthUi();
         bool isFlag = false;
         if (main == null)
             main = GameObject.FindWithTag("main");
         if (main.activeSelf == false) isFlag = true;
         main.SetActive(true);
-        List<GameObject> healthUis = SearchHealthUi();
+        //List<GameObject> healthUis = SearchHealthUi();
         int cnt = 0;
         foreach (GameObject go in healthUis)
         {
