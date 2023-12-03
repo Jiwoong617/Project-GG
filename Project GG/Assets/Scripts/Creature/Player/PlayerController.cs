@@ -30,8 +30,7 @@ public class PlayerController : BaseController
     {
         animator = GetComponent<Animator>();
 
-        //임시
-        stat.SetStat(new StatInfo(100, 100, 100, 0, 10));
+        stat.SetStat(new StatInfo(100, 100, 10, 0, 5));
     }
 
 

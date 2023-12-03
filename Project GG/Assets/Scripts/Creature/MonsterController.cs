@@ -32,6 +32,7 @@ public class MonsterController : BaseController
         stat.SetStat(status);
         transform.position = pos;
 
+        hpBar.value = 1;
         target = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -90,14 +91,14 @@ public class MonsterController : BaseController
     public override void OnAttacked(Stat s)
     {
         int damage = s.Attack;
-        stat.Hp -= Mathf.Clamp(damage - stat.Defence, 0, int.MaxValue);
+        stat.Hp -= Mathf.Clamp(damage - stat.Defence, 1, int.MaxValue);
 
         if (stat.Hp <= 0)
         {
             state = State.Die;
             stat.Hp = 0;
         }
-        hpBar.value = stat.Hp / stat.MaxHp;
+        hpBar.value = (float)stat.Hp / stat.MaxHp;
     }
 
     IEnumerator AttackMotion()
