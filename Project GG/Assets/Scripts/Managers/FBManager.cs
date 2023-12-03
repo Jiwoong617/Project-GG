@@ -223,9 +223,31 @@ public class FBManager : MonoBehaviour
         });
         return r_idict;
     }
-    private void Awake()
+    public async Task<HealthUserData> UserHealthDataLoad(DataVarType _type, string _value)
     {
-        reference = FirebaseDatabase.DefaultInstance.RootReference;
-        path = Path.Combine(Application.dataPath, "uid.json");
+        HealthUserData userData = null;
+        if (_type == DataVarType.UID)
+        {
+            if (_value == null)
+            {
+                Debug.LogError("UID is null");
+                return null;
+            }
+        }
+        if (reference == null) reference = FirebaseDatabase.DefaultInstance.RootReference;
+        await reference.Child("UserData").GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                foreach (var data in snapshot.Children)
+                {
+                    IDictionary targetData = (IDictionary)data.Value;
+                    string targetValue = (string)targetData[_type.ToString()];
+                    if (targetValue == _value) userData = JsonConvert.DeserializeObject<HealthUserData>(data.GetRawJsonValue());
+                }
+            }
+        });
+        return userData;
     }
 }

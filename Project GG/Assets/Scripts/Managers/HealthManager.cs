@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +8,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Newtonsoft.Json;
+using Firebase.Database;
 
 public class HealthManager : MonoBehaviour
 {
@@ -35,19 +39,14 @@ public class HealthManager : MonoBehaviour
         string targetScene = SceneList.AppScene.ToString();
         if (nowScene == targetScene)
         {
-            string uid = "684714fc-e251-4fb6-8e2e-7ebc98e74060";
+            string uid = "d609dcd1-1564-467a-bbb9-587ad252ee5b";
             //string uid = File.ReadAllText(path);
             if (uid == null)
             {
                 Debug.LogError("uid is null");
                 return;
             }
-            IDictionary data = await Manager.FB.UserDataLoad(DataVarType.UID, uid);
-
-            Debug.Log(data);
-            int[] bodyLevelArray = (int[])data[DataVarType.BodyLevelArray.ToString()];
-            int[] bodyExpArray = (int[])data[DataVarType.BodyExpArray.ToString()];
-            int[] bodyMaxExpArray = (int[])data[DataVarType.BodyMaxExpArray.ToString()];
+            HealthUserData userData = await Manager.FB.UserHealthDataLoad(DataVarType.UID, uid);
 
             List<GameObject> healthUis = new List<GameObject>();
             string uiPath = "UiCanvas/Main/Scroll View/Viewport/Content/";
@@ -65,10 +64,10 @@ public class HealthManager : MonoBehaviour
                 TMP_Text maxExp = go.transform.Find(MainHealthUi.MaxExp.ToString()).GetComponent<TMP_Text>();
                 Slider expGauge = go.transform.Find(MainHealthUi.ExpGauge.ToString()).GetComponent<Slider>();
 
-                partsLv.text = "Lv" + bodyLevelArray[cnt];
-                curExp.text = bodyExpArray[cnt].ToString();
-                maxExp.text = bodyMaxExpArray[cnt].ToString();
-                expGauge.value = bodyExpArray[cnt] / bodyMaxExpArray[cnt];
+                partsLv.text = "Lv" + userData.BodyLevelArray[cnt];
+                curExp.text = userData.BodyExpArray[cnt].ToString();
+                maxExp.text = userData.BodyMaxExpArray[cnt].ToString();
+                expGauge.value = userData.BodyExpArray[cnt] / userData.BodyMaxExpArray[cnt];
                 cnt++;
             }
         }
